@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     public float gravity = -9.8f;
     public float jumpForce = 10f;
 
-    private float minMaxVert = 45f;
+    private float minMaxVert = 60f;
     private float _rotationX = 0;
 
 
