@@ -38,9 +38,14 @@ sysinfo.txt
 Child Tale/Logs/shadercompiler-UnityShaderCompiler.exe0.log
 *.log
 Child Tale/Logs/shadercompiler-UnityShaderCompiler.exe0.log
+<<<<<<< HEAD
 Child Tale/Logs/shadercompiler-UnityShaderCompiler.exe0.log
 Child Tale/Logs/shadercompiler-UnityShaderCompiler.exe1.log
 Child Tale/Logs/shadercompiler-UnityShaderCompiler.exe2.log
 *.log
 *.log
 *.log
+=======
+Child Tale/Logs/shadercompiler-UnityShaderCompiler.exe1.log
+Child Tale/Logs/shadercompiler-UnityShaderCompiler.exe2.log
+>>>>>>> e122d3d43d16c385f19444142b21e150b13e3b47
