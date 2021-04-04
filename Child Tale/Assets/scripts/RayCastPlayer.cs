@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class RayCastPlayer : MonoBehaviour
 {
+    [SerializeField] Camera _camera;
+
     void Update()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, 2f))
@@ -14,7 +16,7 @@ public class RayCastPlayer : MonoBehaviour
             var active = hit.transform.gameObject.GetComponent<IInteractable>();
 
             if (Input.GetKeyDown(KeyCode.E) && active != null)
-                    active.Active();
+                active.Active();
         }
     }
 }
