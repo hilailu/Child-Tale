@@ -63,6 +63,22 @@ MonoBehaviour:
     m_Key: Volume
     m_Metadata:
       m_Items: []
+  - m_Id: 985998187995136
+    m_Key: Interact
+    m_Metadata:
+      m_Items: []
+  - m_Id: 997459585048576
+    m_Key: Save
+    m_Metadata:
+      m_Items: []
+  - m_Id: 997556616077312
+    m_Key: ToMain
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1002601009029120
+    m_Key: Pause
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
