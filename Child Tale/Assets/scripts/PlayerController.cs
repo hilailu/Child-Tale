@@ -9,11 +9,12 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Transform endMarker;
     [SerializeField] private GameObject pause;
+
     [SerializeField] private Transform sphereCheck;
     [SerializeField] private LayerMask groundLayer;
     private Vector3 velocity;
 
-    public static bool isPaused;
+    public static bool isPaused = false;
     private bool isGrounded;
 
     public float sensetiveMouse = 9f;
@@ -38,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!pause.activeSelf && !Phone.phone)
+        if (!pause.activeSelf && !Phone.phone && !isPaused)
         {
             // Поворот камеры вокруг оси X
             _rotationX -= Input.GetAxis("Mouse Y") * sensetiveMouse;
@@ -52,32 +53,34 @@ public class PlayerController : MonoBehaviour
             float rotationY = transform.localEulerAngles.y + delta;
 
             transform.localEulerAngles = new Vector3(0, rotationY, 0);
+
+
+
+            // Передвижение игрока по осям X и Z
+            Vector3 movment = new Vector3(Input.GetAxis("Horizontal") * speed, 0, Input.GetAxis("Vertical") * speed);
+            movment = Vector3.ClampMagnitude(movment, speed);
+
+            movment = transform.TransformDirection(movment * Time.deltaTime);
+            _characterController.Move(movment);
+
+
+            // Механика прыжка
+            isGrounded = Physics.CheckSphere(sphereCheck.position, 0.5f, groundLayer);
+
+            if (isGrounded && velocity.y < 0)
+                velocity.y = -2;
+
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+                velocity.y += Mathf.Sqrt(jumpForce * -2f * gravity);
+
+            velocity.y += gravity * Time.deltaTime;
+            _characterController.Move(velocity * Time.deltaTime);
         }
 
         if (Phone.phone)
         {
             _camera.transform.LookAt(endMarker, endMarker.up);
         }
-
-        // Передвижение игрока по осям X и Z
-        Vector3 movment = new Vector3(Input.GetAxis("Horizontal") * speed, 0, Input.GetAxis("Vertical") * speed);
-        movment = Vector3.ClampMagnitude(movment, speed);
-
-        movment = transform.TransformDirection(movment * Time.deltaTime);
-        _characterController.Move(movment);
-
-
-        // Механика прыжка
-        isGrounded = Physics.CheckSphere(sphereCheck.position, 0.5f, groundLayer);
-
-        if (isGrounded && velocity.y < 0)
-            velocity.y = 0;
-
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-            velocity.y += Mathf.Sqrt(jumpForce * -2f * gravity);
-
-        velocity.y += gravity * Time.deltaTime;
-        _characterController.Move(velocity * Time.deltaTime);
 
         //пауза
         if (Input.GetButtonDown("Cancel"))

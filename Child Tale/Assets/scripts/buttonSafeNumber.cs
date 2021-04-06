@@ -1,20 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 
 public class buttonSafeNumber : MonoBehaviour
 {
     [SerializeField] SafeCode safeCode;
-    private TextMeshPro textButton;
+    [SerializeField] TMP_Text textButton;
 
-
-    private void Start()
-    {
-        textButton = GetComponentInChildren<TextMeshPro>();
-    }
 
     public void ButtonNumberClick()
     {
