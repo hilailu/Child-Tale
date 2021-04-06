@@ -115,7 +115,7 @@ MonoBehaviour:
   partsX: 8
   partsY: 8
   preCalculate: 1
-  addTorques: 1
+  addTorques: 0
   hideSplintersInHierarchy: 1
   useCollision: 1
   health: 0
