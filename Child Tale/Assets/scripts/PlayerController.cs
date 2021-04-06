@@ -7,9 +7,8 @@ public class PlayerController : MonoBehaviour
     private Camera _camera;
     private CharacterController _characterController;
 
-    [SerializeField] private GameObject pause;
-    [SerializeField] private Transform sphereCheck;
-    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] Transform sphereCheck;
+    [SerializeField] LayerMask groundLayer;
     private Vector3 velocity;
 
     private bool isGrounded;
@@ -25,8 +24,6 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        Time.timeScale = 1f; 
-
         _camera = GetComponentInChildren<Camera>();
         _characterController = GetComponent<CharacterController>();
 
@@ -37,21 +34,19 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!pause.activeSelf)
-        {
-            // Поворот камеры вокруг оси X
-            _rotationX -= Input.GetAxis("Mouse Y") * sensetiveMouse;
-            _rotationX = Mathf.Clamp(_rotationX, -minMaxVert, minMaxVert);
+        // Поворот камеры вокруг оси X
+        _rotationX -= Input.GetAxis("Mouse Y") * sensetiveMouse;
+        _rotationX = Mathf.Clamp(_rotationX, -minMaxVert, minMaxVert);
 
-            _camera.transform.localEulerAngles = new Vector3(_rotationX, 0, 0);
+        _camera.transform.localEulerAngles = new Vector3(_rotationX, 0, 0);
 
 
-            // Поворот игрока и камеры вокруг оси Y
-            float delta = Input.GetAxis("Mouse X") * sensetiveMouse;
-            float rotationY = transform.localEulerAngles.y + delta;
+        // Поворот игрока и камеры вокруг оси Y
+        float delta = Input.GetAxis("Mouse X") * sensetiveMouse;
+        float rotationY = transform.localEulerAngles.y + delta;
 
-            transform.localEulerAngles = new Vector3(0, rotationY, 0);
-        }
+        transform.localEulerAngles = new Vector3(0, rotationY, 0);
+
 
         // Передвижение игрока по осям X и Z
         Vector3 movment = new Vector3(Input.GetAxis("Horizontal") * speed, 0, Input.GetAxis("Vertical") * speed);
@@ -65,30 +60,12 @@ public class PlayerController : MonoBehaviour
         isGrounded = Physics.CheckSphere(sphereCheck.position, 0.5f, groundLayer);
 
         if (isGrounded && velocity.y < 0)
-            velocity.y = -2;
+            velocity.y = 0;
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
             velocity.y += Mathf.Sqrt(jumpForce * -2f * gravity);
 
         velocity.y += gravity * Time.deltaTime;
         _characterController.Move(velocity * Time.deltaTime);
-
-
-        //пауза
-        if (Input.GetButtonDown("Cancel"))
-        {
-            pause.SetActive(!pause.activeSelf);
-            if (!pause.activeSelf)
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Time.timeScale = 1f;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Time.timeScale = 0f;
-            }
-        }
-
     }
 }

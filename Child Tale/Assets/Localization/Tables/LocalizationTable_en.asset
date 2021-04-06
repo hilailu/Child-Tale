@@ -66,21 +66,5 @@ MonoBehaviour:
     m_Localized: Sound Volume
     m_Metadata:
       m_Items: []
-  - m_Id: 985998187995136
-    m_Localized: Press E to interact
-    m_Metadata:
-      m_Items: []
-  - m_Id: 997459585048576
-    m_Localized: Save Game
-    m_Metadata:
-      m_Items: []
-  - m_Id: 997556616077312
-    m_Localized: To Main Menu
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1002601009029120
-    m_Localized: Paused
-    m_Metadata:
-      m_Items: []
   references:
     version: 1

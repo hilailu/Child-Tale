@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class RayCastPlayer : MonoBehaviour
 {
-    [SerializeField] private Camera _camera;
-    [SerializeField] private Animator _interact;
+    [SerializeField] Camera _camera;
 
     void Update()
     {
@@ -16,17 +15,8 @@ public class RayCastPlayer : MonoBehaviour
         {
             var active = hit.transform.gameObject.GetComponent<IInteractable>();
 
-            if (active != null)
-            {
-                _interact.SetBool("InteractOpen", true);
-
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    _interact.SetBool("InteractOpen", false);
-                    active.Active();
-                }
-            }
+            if (Input.GetKeyDown(KeyCode.E) && active != null)
+                active.Active();
         }
-        else _interact.SetBool("InteractOpen", false);
     }
 }
