@@ -4,7 +4,8 @@ using UnityEngine;
 
 [AddComponentMenu("Breakable Windows/Breakable Window")]
 [RequireComponent(typeof(AudioSource))]
-public class BreakableWindow : MonoBehaviour {
+public class BreakableWindow : MonoBehaviour, IInteractable
+{
 
     
     [Tooltip("Layer should be TransparentFX or your own layer for breakable windows.")]
@@ -249,5 +250,10 @@ public class BreakableWindow : MonoBehaviour {
             }
             else breakWindow();
         }        
+    }
+
+    public void Active()
+    {
+        breakWindow();
     }
 }

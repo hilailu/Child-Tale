@@ -6,8 +6,14 @@ public class CatWalk : MonoBehaviour, IInteractable
 {
     private float speed = 3f;
     [SerializeField] Animator animator;
+    private AudioSource meowAudio;
 
     private bool isMeow = false;
+
+    private void Start()
+    {
+        meowAudio = GetComponent<AudioSource>();
+    }
 
     public void Active()
     {
@@ -18,13 +24,14 @@ public class CatWalk : MonoBehaviour, IInteractable
 
     private IEnumerator CDMeowRoutine()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(0.5f);
+        meowAudio.Play();
+        yield return new WaitForSeconds(1.5f);
         isMeow = false;
         animator.SetBool("Is Meow", isMeow);
     }
 
 
-    // Update is called once per frame
     void Update()
     {
         if (!isMeow)
