@@ -31,6 +31,20 @@ MonoBehaviour:
     - Locale-ru
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
+  - m_GUID: 6220d31bdfce10448b8665e37236ac67
+    m_Address: Phone UI_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 3e84985abc9852244a2194d206de9001
+    m_Address: Phone UI_ru
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: c72cee3c7f7d4fa438372b5a4c185251, type: 2}
   m_SchemaSet:

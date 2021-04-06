@@ -82,13 +82,14 @@ public class PlayerController : MonoBehaviour
             _camera.transform.LookAt(endMarker, endMarker.up);
         }
 
-        //пауза
+        // Пауза
         if (Input.GetButtonDown("Cancel"))
         {
             pause.SetActive(!pause.activeSelf);
             if (!pause.activeSelf)
             {
-                Cursor.lockState = CursorLockMode.Locked;
+                if (!TextFile.isFileOpen)
+                    Cursor.lockState = CursorLockMode.Locked;
                 Time.timeScale = 1f;
                 isPaused = false;
             }

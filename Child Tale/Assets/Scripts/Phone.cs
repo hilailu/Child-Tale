@@ -19,7 +19,8 @@ public class Phone : MonoBehaviour
     void Update()
     {
         time.text = $"{CustomTime.hours:00}:{CustomTime.minutes:00}";
-        if (!PlayerController.isPaused)
+
+        if (!PlayerController.isPaused && !TextFile.isFileOpen)
         {
             if (Input.GetKeyDown(KeyCode.P))
             {
@@ -48,4 +49,5 @@ public class Phone : MonoBehaviour
     {
         GetComponent<MeshRenderer>().enabled = phone;
     }
+
 }
