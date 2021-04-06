@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
         isGrounded = Physics.CheckSphere(sphereCheck.position, 0.5f, groundLayer);
 
         if (isGrounded && velocity.y < 0)
-            velocity.y = 0;
+            velocity.y = -2;
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
             velocity.y += Mathf.Sqrt(jumpForce * -2f * gravity);
