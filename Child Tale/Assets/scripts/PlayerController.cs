@@ -7,11 +7,13 @@ public class PlayerController : MonoBehaviour
     private Camera _camera;
     private CharacterController _characterController;
 
+    [SerializeField] private Transform endMarker;
     [SerializeField] private GameObject pause;
     [SerializeField] private Transform sphereCheck;
     [SerializeField] private LayerMask groundLayer;
     private Vector3 velocity;
 
+    public static bool isPaused;
     private bool isGrounded;
 
     public float sensetiveMouse = 9f;
@@ -21,7 +23,6 @@ public class PlayerController : MonoBehaviour
 
     private float minMaxVert = 60f;
     private float _rotationX = 0;
-
 
     void Start()
     {
@@ -37,7 +38,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!pause.activeSelf)
+        if (!pause.activeSelf && !Phone.phone)
         {
             // Поворот камеры вокруг оси X
             _rotationX -= Input.GetAxis("Mouse Y") * sensetiveMouse;
@@ -51,6 +52,11 @@ public class PlayerController : MonoBehaviour
             float rotationY = transform.localEulerAngles.y + delta;
 
             transform.localEulerAngles = new Vector3(0, rotationY, 0);
+        }
+
+        if (Phone.phone)
+        {
+            _camera.transform.LookAt(endMarker, endMarker.up);
         }
 
         // Передвижение игрока по осям X и Z
@@ -73,7 +79,6 @@ public class PlayerController : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         _characterController.Move(velocity * Time.deltaTime);
 
-
         //пауза
         if (Input.GetButtonDown("Cancel"))
         {
@@ -82,11 +87,13 @@ public class PlayerController : MonoBehaviour
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Time.timeScale = 1f;
+                isPaused = false;
             }
             else
             {
                 Cursor.lockState = CursorLockMode.None;
                 Time.timeScale = 0f;
+                isPaused = true;
             }
         }
 
