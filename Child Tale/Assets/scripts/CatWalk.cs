@@ -13,20 +13,20 @@ public class CatWalk : MonoBehaviour, IInteractable
     private void Start()
     {
         meowAudio = GetComponent<AudioSource>();
+        StartCoroutine(MeowSomeTimesRoutine());
     }
 
     public void Active()
     {
         isMeow = true;
         animator.SetBool("Is Meow", isMeow);
+        meowAudio.PlayDelayed(0.5f);
         StartCoroutine(CDMeowRoutine());
     }
 
     private IEnumerator CDMeowRoutine()
     {
-        yield return new WaitForSeconds(0.5f);
-        meowAudio.Play();
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2f);
         isMeow = false;
         animator.SetBool("Is Meow", isMeow);
     }
@@ -46,5 +46,14 @@ public class CatWalk : MonoBehaviour, IInteractable
                 transform.Rotate(new Vector3(0, Random.Range(-100, 100), 0));
             }
         }
+    }
+
+
+    IEnumerator MeowSomeTimesRoutine()
+    {
+        yield return new WaitForSeconds(Random.Range(8f, 12f));
+        if (!isMeow)
+            meowAudio.Play();
+        StartCoroutine(MeowSomeTimesRoutine());
     }
 }

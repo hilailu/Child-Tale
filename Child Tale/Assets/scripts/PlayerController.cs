@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Camera _camera;
+    public Camera cameraMain;
     private CharacterController _characterController;
 
     [SerializeField] private Transform endMarker;
@@ -27,9 +27,9 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        Time.timeScale = 1f; 
+        Time.timeScale = 1f;
 
-        _camera = GetComponentInChildren<Camera>();
+        cameraMain = GetComponentInChildren<Camera>();
         _characterController = GetComponent<CharacterController>();
 
         // Закрепление курсора в центре экрана и отключение его видимости
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
             _rotationX -= Input.GetAxis("Mouse Y") * sensetiveMouse;
             _rotationX = Mathf.Clamp(_rotationX, -minMaxVert, minMaxVert);
 
-            _camera.transform.localEulerAngles = new Vector3(_rotationX, 0, 0);
+            cameraMain.transform.localEulerAngles = new Vector3(_rotationX, 0, 0);
 
 
             // Поворот игрока и камеры вокруг оси Y
@@ -79,23 +79,27 @@ public class PlayerController : MonoBehaviour
 
         if (Phone.phone)
         {
-            _camera.transform.LookAt(endMarker, endMarker.up);
+            cameraMain.transform.LookAt(endMarker, endMarker.up);
         }
 
         // Пауза
-        if (Input.GetButtonDown("Cancel"))
+        if (!SafeCode.isActive && Input.GetKeyDown(KeyCode.Escape))
         {
             pause.SetActive(!pause.activeSelf);
             if (!pause.activeSelf)
             {
                 if (!TextFile.isFileOpen)
+                {
                     Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                }
                 Time.timeScale = 1f;
                 isPaused = false;
             }
             else
             {
                 Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 Time.timeScale = 0f;
                 isPaused = true;
             }
