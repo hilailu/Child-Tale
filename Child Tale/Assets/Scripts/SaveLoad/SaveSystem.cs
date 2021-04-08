@@ -5,7 +5,7 @@ using UnityEngine;
 public class SaveSystem : MonoBehaviour
 {
     private List<ISaveable> saves = new List<ISaveable>();
-    private List<GameObject> savesGO;
+    [SerializeField] private List<GameObject> savesGO;
 
     private void Awake()
     {

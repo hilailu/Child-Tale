@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : MonoBehaviour, ISaveable
 {
     #region Singleton
     public static InventoryManager instance;
@@ -15,7 +15,6 @@ public class InventoryManager : MonoBehaviour
     }
     #endregion
 
-    [SerializeField] private GameObject panel;
     public List<Item> items = new List<Item>();
     private int storage = 5;
     public InventoryItem[] inventoryItems;
@@ -25,7 +24,7 @@ public class InventoryManager : MonoBehaviour
     void Start()
     {
         instance.OnInventoryChanged += UpdateUI;
-        inventoryItems = panel.GetComponentsInChildren<InventoryItem>(true);
+        inventoryItems = GetComponentsInChildren<InventoryItem>(true);
         UpdateUI();
     }
 
@@ -58,5 +57,24 @@ public class InventoryManager : MonoBehaviour
     {
         items.Remove(item);
         OnInventoryChanged?.Invoke();
+    }
+
+    public void Save()
+    {
+        Debug.Log("Save Inventory");
+        PlayerPrefs.SetString("InventoryJSON", JsonUtility.ToJson(this, true));
+        PlayerPrefs.Save();
+    }
+
+    public void Load()
+    {
+        Debug.Log("Load Inventory");
+        JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("InventoryJSON"), this);
+        OnInventoryChanged?.Invoke();
+    }
+
+    public void DeleteSave()
+    {
+        PlayerPrefs.DeleteKey("InventoryJSON");
     }
 }

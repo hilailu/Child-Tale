@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, ISaveable
 {
     public Camera cameraMain;
     private CharacterController _characterController;
@@ -20,6 +19,8 @@ public class PlayerController : MonoBehaviour
     public float speed = 6f;
     public float gravity = -9.8f;
     public float jumpForce = 10f;
+    public Vector3 pos;
+    public Quaternion rot;
 
     private float minMaxVert = 60f;
     private float _rotationX = 0;
@@ -74,6 +75,9 @@ public class PlayerController : MonoBehaviour
 
             velocity.y += gravity * Time.deltaTime;
             _characterController.Move(velocity * Time.deltaTime);
+
+            pos = transform.position;
+            rot = transform.rotation;
         }
 
         // Пауза
@@ -99,5 +103,25 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+    }
+
+    public void Save()
+    {
+        Debug.Log("Save Player");
+        PlayerPrefs.SetString("PlayerJSON", JsonUtility.ToJson(this, true));
+        PlayerPrefs.Save();
+    }
+
+    public void Load()
+    {
+        Debug.Log("Load Player");
+        JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("PlayerJSON"), this);
+        transform.position = pos;
+        transform.rotation = rot;
+    }
+
+    public void DeleteSave()
+    {
+        PlayerPrefs.DeleteKey("PlayerJSON");
     }
 }

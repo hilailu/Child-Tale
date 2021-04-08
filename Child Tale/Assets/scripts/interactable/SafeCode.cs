@@ -1,10 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class SafeCode : MonoBehaviour, IInteractable
+public class SafeCode : MonoBehaviour, IInteractable, ISaveable
 {
     public TMP_Text inputField;
     [SerializeField] Animator animator;
@@ -23,7 +23,7 @@ public class SafeCode : MonoBehaviour, IInteractable
     private Quaternion startPointCameraQuat;
     private Transform startPointCamera;
 
-
+    public bool isOpened = false;
 
     private void Start()
     {
@@ -34,13 +34,14 @@ public class SafeCode : MonoBehaviour, IInteractable
     {
         if (inputField.text == answer)
         {
+            isOpened = true;
             animator.SetTrigger("Open");
-            inputField.text = "Success";
+            inputField.text = "\u2713"; // ✓
             audioSource.Play();
         }
         else
         {
-            inputField.text = "error";
+            inputField.text = "\u274C"; //❌
         }
     }
 
@@ -82,5 +83,27 @@ public class SafeCode : MonoBehaviour, IInteractable
     {
         yield return new WaitForSeconds(0.1f);
         isActive = false;
+    }
+
+    public void Save()
+    {
+        Debug.Log("Save Safe");
+        PlayerPrefs.SetString("SafeJSON", JsonUtility.ToJson(this, true));
+        PlayerPrefs.Save();
+    }
+
+    public void Load()
+    {
+        Debug.Log("Load Safe");
+        JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("SafeJSON"), this);
+        if (isOpened)
+            animator.SetTrigger("Open");
+        else
+            animator.Play("New State");
+    }
+
+    public void DeleteSave()
+    {
+        PlayerPrefs.DeleteKey("SafeJSON");
     }
 }
