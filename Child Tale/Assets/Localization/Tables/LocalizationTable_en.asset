@@ -82,5 +82,9 @@ MonoBehaviour:
     m_Localized: Paused
     m_Metadata:
       m_Items: []
+  - m_Id: 2274778764083200
+    m_Localized: Load The Game
+    m_Metadata:
+      m_Items: []
   references:
     version: 1
