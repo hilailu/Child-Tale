@@ -6,6 +6,8 @@ using TMPro;
 
 public class Phone : MonoBehaviour
 {
+    [SerializeField] private PlayerController player;
+    [SerializeField] private Transform endMarker;
     [SerializeField] private GameObject phoneUI;
     [SerializeField] private TMP_Text time;
     private Animator anim;
@@ -35,6 +37,7 @@ public class Phone : MonoBehaviour
                 }
                 else
                 {
+                    player.cameraMain.transform.localRotation = Quaternion.identity;
                     Hide();
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true;

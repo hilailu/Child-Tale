@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
     public Camera cameraMain;
     private CharacterController _characterController;
 
-    [SerializeField] private Transform endMarker;
     [SerializeField] private GameObject pause;
 
     [SerializeField] private Transform sphereCheck;
@@ -75,11 +74,6 @@ public class PlayerController : MonoBehaviour
 
             velocity.y += gravity * Time.deltaTime;
             _characterController.Move(velocity * Time.deltaTime);
-        }
-
-        if (Phone.phone)
-        {
-            cameraMain.transform.LookAt(endMarker, endMarker.up);
         }
 
         // Пауза
