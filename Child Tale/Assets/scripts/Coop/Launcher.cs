@@ -45,7 +45,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
         buttonLoadArena.SetActive(false);
 
-        ConnectToPhoton();
+        //ConnectToPhoton();
     }
 
     private void Awake()
@@ -67,7 +67,10 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     // Tutorial Methods
 
-    void ConnectToPhoton()
+    public void Disconect()
+        => PhotonNetwork.Disconnect();
+
+    public void ConnectToPhoton()
     {
         connectionStatus.text = "connecting...";
         PhotonNetwork.GameVersion = gameVersion;

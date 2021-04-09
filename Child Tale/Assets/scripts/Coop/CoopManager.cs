@@ -24,7 +24,7 @@ public class CoopManager : MonoBehaviourPunCallbacks
             return;
         }
 
-        if(PlayerManager.LocalPlayerInstance == null)
+        if(PlayerManager.LocalPlayerInstance == null && !PhotonNetwork.OfflineMode)
         {
             if(PhotonNetwork.IsMasterClient)
             {
@@ -43,18 +43,6 @@ public class CoopManager : MonoBehaviourPunCallbacks
         }
     }
 
-    // Update Method
-
-    //private void Update()
-    //{
-    //    if(Input.GetKeyDown(KeyCode.Escape))
-    //    {
-    //        Application.Quit();
-    //    }
-    //}
-
-    // Photon Methods
-
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         Debug.Log("onplayerleftroom");
@@ -63,11 +51,4 @@ public class CoopManager : MonoBehaviourPunCallbacks
             PhotonNetwork.LoadLevel(0);
         }
     }
-
-    //Helper Methods
-
-    //public void QuitRoom()
-    //{
-    //    Application.Quit();
-    //}
 }

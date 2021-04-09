@@ -6,6 +6,7 @@ using UnityEngine.Localization.Settings;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private AudioMixer mixer;
+    [SerializeField] Launcher launcher;
 
     private void Awake()
     {
@@ -15,6 +16,7 @@ public class MainMenu : MonoBehaviour
     public void Play()
     {
         SceneManager.LoadScene(1);
+        Photon.Pun.PhotonNetwork.OfflineMode = true;
     }
 
     public void Volume(float vol)
@@ -39,4 +41,6 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    public void ConnectToPhotonServer()
+        => launcher.ConnectToPhoton();
 }
