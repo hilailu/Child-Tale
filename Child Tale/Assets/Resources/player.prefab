@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4437357653924804705}
   - component: {fileID: 4437357653924804710}
   - component: {fileID: 4437357653924804711}
+  - component: {fileID: 1895636569390062450}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -83,6 +84,19 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4437357653924804708}
   m_Enabled: 1
+--- !u!114 &1895636569390062450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4437357653924804708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52abbc7571b09094882c379269ab3441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
 --- !u!1 &4437357654503026271
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,7 +141,6 @@ GameObject:
   - component: {fileID: 4437357655123530162}
   - component: {fileID: 4437357655123530174}
   - component: {fileID: 4437357655123530169}
-  - component: {fileID: 4437357655123530168}
   - component: {fileID: 3842903028041320458}
   - component: {fileID: -740592212018403911}
   m_Layer: 3
@@ -230,7 +243,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraMain: {fileID: 4437357653924804710}
-  pause: {fileID: 0}
   sphereCheck: {fileID: 4437357654503026270}
   groundLayer:
     serializedVersion: 2
@@ -241,6 +253,8 @@ MonoBehaviour:
   jumpForce: 3.5
   pos: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0, w: 0}
+  photonView: {fileID: 0}
+  nickName: 
 --- !u!143 &4437357655123530169
 CharacterController:
   m_ObjectHideFlags: 0
@@ -259,20 +273,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4437357655123530168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4437357655123530163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52abbc7571b09094882c379269ab3441, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _camera: {fileID: 4437357653924804710}
-  _interact: {fileID: 0}
 --- !u!114 &3842903028041320458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,7 +309,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 3842903028041320458}
-  sceneViewId: 0
+  sceneViewId: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!1001 &1865101065637475039

@@ -21,7 +21,7 @@ public class DoorExit : MonoBehaviour, IInteractable
         if (inventory.items.Contains(key))
         {
             animator.SetTrigger("Game Over");
-            PlayerController.isPaused = true;
+            GameManager.isPaused = true;
             audioSource.PlayOneShot(openDoorSounde);
         }
         else

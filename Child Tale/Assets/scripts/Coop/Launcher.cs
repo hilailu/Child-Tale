@@ -100,7 +100,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void LoadArena()
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount > 1)
+        if (PhotonNetwork.CurrentRoom.PlayerCount > 0)
         {
             PhotonNetwork.LoadLevel(1);
         }

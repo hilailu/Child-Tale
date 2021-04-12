@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class RayCastPlayer : MonoBehaviour
 {
-    [SerializeField] private Camera _camera;
-    [SerializeField] private Animator _interact;
+    private Camera _camera;
+    public GameManager gameManager;
+
+    private void Start()
+    {
+        _camera = GetComponentInChildren<Camera>();         ////
+    }
 
     void Update()
     {
-        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, 2f))
@@ -18,15 +23,20 @@ public class RayCastPlayer : MonoBehaviour
 
             if (active != null)
             {
-                _interact.SetBool("InteractOpen", true);
+                gameManager.SetInteractableAnim(true);
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    _interact.SetBool("InteractOpen", false);
+                    //gameManager.SetInteractableAnim(false);
+
                     active.Active();
                 }
             }
         }
-        else _interact.SetBool("InteractOpen", false);
+        else
+        {
+            gameManager.SetInteractableAnim(false);
+        }
+
     }
 }

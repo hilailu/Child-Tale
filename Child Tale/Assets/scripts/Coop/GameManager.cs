@@ -1,0 +1,105 @@
+using UnityEngine;
+using Photon.Realtime;
+using Photon.Pun;
+using UnityEngine.SceneManagement;
+using Photon.Pun.Demo.PunBasics;
+
+public class GameManager : MonoBehaviourPunCallbacks
+{
+    public GameObject player1SpawnPosition;
+    public GameObject player2SpawnPosition;
+    public GameObject singlePlayer;
+
+    private GameObject player1;
+    private GameObject player2;
+
+    [SerializeField] private GameObject pause;
+    public static bool isPaused;
+
+    [SerializeField] private Animator _interactAnimator;
+
+    // Start Method
+
+    private void Start()
+    {
+        isPaused = false;
+
+        if (!PhotonNetwork.IsConnected && !PhotonNetwork.OfflineMode)
+        {
+            SceneManager.LoadScene(0);
+            return;
+        }
+
+        if (PlayerManager.LocalPlayerInstance == null && !PhotonNetwork.OfflineMode)
+        {
+            Destroy(singlePlayer);
+
+            if (PhotonNetwork.IsMasterClient)
+            {
+                Debug.Log("instatntiating player 1");
+                player1 = PhotonNetwork.Instantiate("player",
+                    player1SpawnPosition.transform.position,
+                    player1SpawnPosition.transform.rotation, 0);
+                //player1.gameObject.name = player1.GetComponent<PhotonView>().Owner.NickName;
+
+                player1.GetComponentInChildren<RayCastPlayer>().gameManager = this;
+                
+            }
+            else
+            {
+                Debug.Log("instatntiating player 2");
+                player2 = PhotonNetwork.Instantiate("player",
+                    player2SpawnPosition.transform.position,
+                    player2SpawnPosition.transform.rotation, 0);
+                //player2.gameObject.name = player1.GetComponent<PhotonView>().Owner.NickName;
+
+                player2.GetComponentInChildren<RayCastPlayer>().gameManager = this;
+
+            }
+        }
+    }
+
+
+    private void Update()
+    {
+        // Пауза
+        if (!SafeCode.isActive && Input.GetKeyDown(KeyCode.Escape))
+        {
+            pause.SetActive(!pause.activeSelf);
+            if (!pause.activeSelf)
+            {
+                if (!TextFile.isFileOpen)
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                }
+                Time.timeScale = 1f;
+                isPaused = false;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                isPaused = true;
+                if (PhotonNetwork.OfflineMode)
+                    Time.timeScale = 0f;
+            }
+        }
+    }
+
+
+    public void SetInteractableAnim(bool bol)
+    {
+        _interactAnimator.SetBool("InteractOpen", bol);
+    }
+
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        Debug.Log("onplayerleftroom");
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.LoadLevel(0);
+        }
+    }
+}

@@ -5,14 +5,10 @@ public class PlayerController : MonoBehaviour, ISaveable
 {
     public Camera cameraMain;
     private CharacterController _characterController;
-
-    [SerializeField] private GameObject pause;
-
     [SerializeField] private Transform sphereCheck;
     [SerializeField] private LayerMask groundLayer;
     private Vector3 velocity;
 
-    public static bool isPaused = false;
     private bool isGrounded;
 
     public float sensetiveMouse = 9f;
@@ -25,21 +21,34 @@ public class PlayerController : MonoBehaviour, ISaveable
     private float minMaxVert = 60f;
     private float _rotationX = 0;
 
+    public Photon.Pun.PhotonView photonView;
+    public string nickName;
+
     void Start()
     {
+        //isPaused = false;
+        photonView = GetComponent<Photon.Pun.PhotonView>();
+
         Time.timeScale = 1f;
 
         cameraMain = GetComponentInChildren<Camera>();
         _characterController = GetComponent<CharacterController>();
 
+
         // Закрепление курсора в центре экрана и отключение его видимости
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+
+        if (!photonView.IsMine)
+        {
+            Destroy(cameraMain.gameObject);
+        }
     }
 
     void Update()
     {
-        if (!pause.activeSelf && !Phone.phone && !isPaused)
+        if (photonView.IsMine && !Phone.phone && !GameManager.isPaused)
         {
             // Поворот камеры вокруг оси X
             _rotationX -= Input.GetAxis("Mouse Y") * sensetiveMouse;
@@ -79,30 +88,6 @@ public class PlayerController : MonoBehaviour, ISaveable
             pos = transform.position;
             rot = transform.rotation;
         }
-
-        // Пауза
-        if (!SafeCode.isActive && Input.GetKeyDown(KeyCode.Escape))
-        {
-            pause.SetActive(!pause.activeSelf);
-            if (!pause.activeSelf)
-            {
-                if (!TextFile.isFileOpen)
-                {
-                    Cursor.lockState = CursorLockMode.Locked;
-                    Cursor.visible = false;
-                }
-                Time.timeScale = 1f;
-                isPaused = false;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                Time.timeScale = 0f;
-                isPaused = true;
-            }
-        }
-
     }
 
     public void Save()

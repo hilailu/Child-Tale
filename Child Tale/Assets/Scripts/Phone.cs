@@ -22,7 +22,7 @@ public class Phone : MonoBehaviour
     {
         time.text = $"{CustomTime.hours:00}:{CustomTime.minutes:00}";
 
-        if (!PlayerController.isPaused && !TextFile.isFileOpen)
+        if (!GameManager.isPaused && !TextFile.isFileOpen)
         {
             if (Input.GetKeyDown(KeyCode.P))
             {

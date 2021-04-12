@@ -21,7 +21,6 @@ public class SafeCode : MonoBehaviour, IInteractable, ISaveable
 
     private Vector3 startPointCameraPos;
     private Quaternion startPointCameraQuat;
-    private Transform startPointCamera;
 
     public bool isOpened = false;
 
@@ -54,14 +53,14 @@ public class SafeCode : MonoBehaviour, IInteractable, ISaveable
         startPointCameraQuat = player.cameraMain.transform.rotation;
 
         isActive = true;
-        Cursor.visible = isActive;
-        PlayerController.isPaused = isActive;
+        Cursor.visible = true;
+        GameManager.isPaused = true;
         Cursor.lockState = CursorLockMode.None;
     }
 
     private void Update()
     {
-        if (isActive && PlayerController.isPaused)
+        if (isActive && GameManager.isPaused)
         {
             player.cameraMain.transform.position = Vector3.Lerp(player.cameraMain.transform.position, pointForCamera.position, Time.deltaTime * 2);
             player.cameraMain.transform.rotation = Quaternion.Lerp(player.cameraMain.transform.rotation, pointForCamera.rotation, Time.deltaTime * 2);
@@ -70,7 +69,7 @@ public class SafeCode : MonoBehaviour, IInteractable, ISaveable
         if (isActive && Input.GetKeyDown(KeyCode.Escape))
         {
             StartCoroutine(aaa());
-            PlayerController.isPaused = false;
+            GameManager.isPaused = false;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
 
