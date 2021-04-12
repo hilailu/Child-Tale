@@ -14,7 +14,7 @@ public class RayCastPlayer : MonoBehaviour
 
     void Update()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, 2f))
@@ -27,8 +27,6 @@ public class RayCastPlayer : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    //gameManager.SetInteractableAnim(false);
-
                     active.Active();
                 }
             }
@@ -37,6 +35,5 @@ public class RayCastPlayer : MonoBehaviour
         {
             gameManager.SetInteractableAnim(false);
         }
-
     }
 }

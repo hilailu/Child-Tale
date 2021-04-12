@@ -24,13 +24,15 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         isPaused = false;
 
-        if (!PhotonNetwork.IsConnected && !PhotonNetwork.OfflineMode)
+        if (PhotonNetwork.OfflineMode) return;
+
+        if (!PhotonNetwork.IsConnected)
         {
             SceneManager.LoadScene(0);
             return;
         }
 
-        if (PlayerManager.LocalPlayerInstance == null && !PhotonNetwork.OfflineMode)
+        if (PlayerManager.LocalPlayerInstance == null)
         {
             Destroy(singlePlayer);
 
@@ -70,9 +72,11 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                 if (!TextFile.isFileOpen)
                 {
-                    Cursor.lockState = CursorLockMode.Locked;
-                    Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
                 }
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
                 Time.timeScale = 1f;
                 isPaused = false;
             }

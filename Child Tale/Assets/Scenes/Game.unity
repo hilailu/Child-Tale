@@ -6170,7 +6170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   savesGO:
-  - {fileID: 0}
+  - {fileID: 1086065910}
   - {fileID: 1455604644}
   - {fileID: 1341670850}
   - {fileID: 2061675627}
@@ -13543,6 +13543,14 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 745161274921742330, guid: a854493663b1a074887f3f4cdf3ea8d1, type: 3}
+      propertyPath: sceneViewId
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581364675650822448, guid: a854493663b1a074887f3f4cdf3ea8d1, type: 3}
+      propertyPath: sceneViewId
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4512056913629207832, guid: a854493663b1a074887f3f4cdf3ea8d1, type: 3}
       propertyPath: sceneViewId
       value: 6
@@ -13550,6 +13558,10 @@ PrefabInstance:
     - target: {fileID: 7359811492873338907, guid: a854493663b1a074887f3f4cdf3ea8d1, type: 3}
       propertyPath: m_Name
       value: doorway (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7773563033420972382, guid: a854493663b1a074887f3f4cdf3ea8d1, type: 3}
+      propertyPath: sceneViewId
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7883723923848551073, guid: a854493663b1a074887f3f4cdf3ea8d1, type: 3}
       propertyPath: m_RootOrder
@@ -14919,6 +14931,14 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 745161274921742330, guid: a854493663b1a074887f3f4cdf3ea8d1, type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581364675650822448, guid: a854493663b1a074887f3f4cdf3ea8d1, type: 3}
+      propertyPath: sceneViewId
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4512056913629207832, guid: a854493663b1a074887f3f4cdf3ea8d1, type: 3}
       propertyPath: sceneViewId
       value: 5
@@ -14926,6 +14946,10 @@ PrefabInstance:
     - target: {fileID: 7359811492873338907, guid: a854493663b1a074887f3f4cdf3ea8d1, type: 3}
       propertyPath: m_Name
       value: doorway (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7773563033420972382, guid: a854493663b1a074887f3f4cdf3ea8d1, type: 3}
+      propertyPath: sceneViewId
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7883723923848551073, guid: a854493663b1a074887f3f4cdf3ea8d1, type: 3}
       propertyPath: m_RootOrder
@@ -18218,7 +18242,7 @@ PrefabInstance:
     - target: {fileID: 1022230880, guid: ef554a9589009fd4284dd44a46a66561, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3464192800548208664}
     - target: {fileID: 1415856652302733324, guid: ef554a9589009fd4284dd44a46a66561, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -18733,14 +18757,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1895636569390062450, guid: 67cd8180120348f42bab4edad348e063, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 223974227}
     - target: {fileID: 4437357655123530163, guid: 67cd8180120348f42bab4edad348e063, type: 3}
       propertyPath: m_Name
       value: player
       objectReference: {fileID: 0}
-    - target: {fileID: 4437357655123530168, guid: 67cd8180120348f42bab4edad348e063, type: 3}
-      propertyPath: gameManager
-      value: 
-      objectReference: {fileID: 223974227}
     - target: {fileID: 4437357655123530175, guid: 67cd8180120348f42bab4edad348e063, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -18787,6 +18811,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67cd8180120348f42bab4edad348e063, type: 3}
+--- !u!114 &3464192800548208664 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4437357655123530174, guid: 67cd8180120348f42bab4edad348e063, type: 3}
+  m_PrefabInstance: {fileID: 3464192800548208663}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086065910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71401e06a275333459779f9cf06712e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &3469287838664415016
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -18916,21 +18951,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1664093357}
     m_Modifications:
-    - target: {fileID: 4512056913629207832, guid: a854493663b1a074887f3f4cdf3ea8d1, type: 3}
+    - target: {fileID: 2581364675650822448, guid: a854493663b1a074887f3f4cdf3ea8d1, type: 3}
       propertyPath: sceneViewId
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6772130643140982858, guid: a854493663b1a074887f3f4cdf3ea8d1, type: 3}
-      propertyPath: m_SynchronizeLayers.Array.data[0].SynchronizeType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6772130643140982858, guid: a854493663b1a074887f3f4cdf3ea8d1, type: 3}
-      propertyPath: m_SynchronizeParameters.Array.data[0].SynchronizeType
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7359811492873338907, guid: a854493663b1a074887f3f4cdf3ea8d1, type: 3}
       propertyPath: m_Name
       value: doorway (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7773563033420972382, guid: a854493663b1a074887f3f4cdf3ea8d1, type: 3}
+      propertyPath: sceneViewId
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7883723923848551073, guid: a854493663b1a074887f3f4cdf3ea8d1, type: 3}
       propertyPath: m_RootOrder

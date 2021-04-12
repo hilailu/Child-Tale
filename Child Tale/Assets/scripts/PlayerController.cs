@@ -1,7 +1,8 @@
+using Photon.Pun;
 using System.IO;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, ISaveable
+public class PlayerController : MonoBehaviour, ISaveable, IPunObservable
 {
     public Camera cameraMain;
     private CharacterController _characterController;
@@ -21,16 +22,12 @@ public class PlayerController : MonoBehaviour, ISaveable
     private float minMaxVert = 60f;
     private float _rotationX = 0;
 
-    public Photon.Pun.PhotonView photonView;
+    public PhotonView photonView;
     public string nickName;
 
     void Start()
     {
-        //isPaused = false;
-        photonView = GetComponent<Photon.Pun.PhotonView>();
-
-        Time.timeScale = 1f;
-
+        photonView = GetComponent<PhotonView>();
         cameraMain = GetComponentInChildren<Camera>();
         _characterController = GetComponent<CharacterController>();
 
@@ -43,6 +40,7 @@ public class PlayerController : MonoBehaviour, ISaveable
         if (!photonView.IsMine)
         {
             Destroy(cameraMain.gameObject);
+            Destroy(GetComponentInChildren<Phone>().gameObject);
         }
     }
 
@@ -55,6 +53,7 @@ public class PlayerController : MonoBehaviour, ISaveable
             _rotationX = Mathf.Clamp(_rotationX, -minMaxVert, minMaxVert);
 
             cameraMain.transform.localEulerAngles = new Vector3(_rotationX, 0, 0);
+
 
 
             // Поворот игрока и камеры вокруг оси Y
@@ -73,6 +72,7 @@ public class PlayerController : MonoBehaviour, ISaveable
             _characterController.Move(movment);
 
 
+
             // Механика прыжка
             isGrounded = Physics.CheckSphere(sphereCheck.position, 0.5f, groundLayer);
 
@@ -85,9 +85,20 @@ public class PlayerController : MonoBehaviour, ISaveable
             velocity.y += gravity * Time.deltaTime;
             _characterController.Move(velocity * Time.deltaTime);
 
+
+
             pos = transform.position;
             rot = transform.rotation;
+
+
+            if (Input.GetKey(KeyCode.Z))
+            {
+                isRed = true;
+            }
+            else isRed = false;
         }
+        if (isRed) GetComponent<MeshRenderer>().material.color = Color.red;
+        else GetComponent<MeshRenderer>().material.color = Color.white;
     }
 
     public void Save()
@@ -109,4 +120,17 @@ public class PlayerController : MonoBehaviour, ISaveable
     {
         PlayerPrefs.DeleteKey("PlayerJSON");
     }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(isRed);
+        }
+        else if (stream.IsReading)
+        {
+            isRed = (bool)stream.ReceiveNext();
+        }
+    }
+    bool isRed;
 }

@@ -24,13 +24,9 @@ public class SafeCode : MonoBehaviour, IInteractable, ISaveable
 
     public bool isOpened = false;
 
-    private void Start()
-    {
-        isActive = false;
-    }
-
     public void checkAnswer()
     {
+        if (isOpened) return;
         if (inputField.text == answer)
         {
             isOpened = true;
@@ -70,8 +66,6 @@ public class SafeCode : MonoBehaviour, IInteractable, ISaveable
         {
             StartCoroutine(aaa());
             GameManager.isPaused = false;
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
 
             player.cameraMain.transform.position = startPointCameraPos;
             player.cameraMain.transform.rotation = startPointCameraQuat;
@@ -80,8 +74,10 @@ public class SafeCode : MonoBehaviour, IInteractable, ISaveable
 
     IEnumerator aaa()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.01f);
         isActive = false;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void Save()
