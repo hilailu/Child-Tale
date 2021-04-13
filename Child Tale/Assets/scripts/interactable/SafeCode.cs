@@ -96,7 +96,7 @@ public class SafeCode : MonoBehaviour, IInteractable, ISaveable
         if (PlayerData.instance.isSafeOpened)
         {
             isOpened = true;
-            animator.SetTrigger("Open");
+            animator.Play("openedsafe");
         }
         else
             animator.Play("New State");

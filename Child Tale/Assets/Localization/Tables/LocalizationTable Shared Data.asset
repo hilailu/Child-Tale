@@ -16,7 +16,7 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: 18a2a0c807cadbe4eac04da1826f86c2
   m_Entries:
   - m_Id: 506181099520
-    m_Key: New Game
+    m_Key: New
     m_Metadata:
       m_Items: []
   - m_Id: 743666786304
@@ -80,7 +80,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2274778764083200
-    m_Key: loadLvlButton
+    m_Key: Continue
     m_Metadata:
       m_Items: []
   m_Metadata:

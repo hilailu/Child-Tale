@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
+using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 using System.IO;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
@@ -11,6 +13,13 @@ public class MainMenu : MonoBehaviour
     [SerializeField] Launcher launcher;
     [SerializeField] private Button newGame;
     [SerializeField] private Button continueGame;
+    [SerializeField] private TMP_Text newOrContinue;
+    private LocalizedString newOrNot = new LocalizedString { TableReference = "UI Text", TableEntryReference = "New"};
+
+    void UpdateString(string translatedValue)
+    {
+        newOrContinue.text = translatedValue;
+    }
 
     private void Awake()
     {
@@ -19,42 +28,36 @@ public class MainMenu : MonoBehaviour
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        newOrNot.StringChanged += UpdateString;
+    }
 
+    private void Start()
+    {
         CheckSave();
     }
 
     public void CheckSave()
     {
         if (File.Exists(Application.persistentDataPath + "/PlayerData.json"))
-        {
-            newGame.gameObject.SetActive(false);
-            continueGame.gameObject.SetActive(true);
-        }
+            newOrNot.TableEntryReference = "Continue";
         else
-        {
-            newGame.gameObject.SetActive(true);
-            continueGame.gameObject.SetActive(false);
-        }
+            newOrNot.TableEntryReference = "New";
     }
 
     public void Play()
     {
         SceneManager.LoadScene(1);
         Photon.Pun.PhotonNetwork.OfflineMode = true;
-        GameManager.isLoading = false;
-    }
-
-    public void Load()
-    {
-        SceneManager.LoadScene(1);
-        Photon.Pun.PhotonNetwork.OfflineMode = true;
-        GameManager.isLoading = true;
+        if (newOrNot.TableEntryReference == "Continue")
+            GameManager.isLoading = true;
+        else
+            GameManager.isLoading = false;
     }
 
     public void DeleteProgress()
     {
         File.Delete(Application.persistentDataPath + "/PlayerData.json");
-        CheckSave();
+        newOrNot.TableEntryReference = "New";
     }
 
     public void Volume(float vol)
