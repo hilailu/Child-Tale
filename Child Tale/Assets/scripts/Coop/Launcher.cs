@@ -7,26 +7,10 @@ using Photon.Pun;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
-    //[SerializeField]
-    //private GameObject controlPanel;
-
-    //[SerializeField]
-    //private Text feedbackText;
-
     [SerializeField]
     private byte maxPlayersPerRoom = 2;
 
-    //bool isConnecting;
-
     string gameVersion = "1";
-
-    //[Space(10)]
-    //[Header("Custom Variables")]
-    //public InputField playerNameField;
-    //public InputField roomNameField;
-
-    //[Space(5)]
-    //public Text playerStatus;
     public Text connectionStatus;
 
     [Space(5)]
@@ -41,7 +25,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
 
         buttonLoadArena.SetActive(false);
 

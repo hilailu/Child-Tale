@@ -1,22 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class CatWalk : MonoBehaviour, IInteractable
 {
     private float speed = 3f;
     [SerializeField] Animator animator;
     private AudioSource meowAudio;
+    private PhotonView PV;
 
     private bool isMeow = false;
 
     private void Start()
     {
         meowAudio = GetComponent<AudioSource>();
+        PV = GetComponent<PhotonView>();
         StartCoroutine(MeowSomeTimesRoutine());
     }
 
     public void Active()
+    {
+        if (PhotonNetwork.OfflineMode)
+            PlayMeowAnim();
+        else
+            PV.RPC("PlayMeowAnim", RpcTarget.All);
+    }
+
+    [PunRPC]
+    void PlayMeowAnim()
     {
         isMeow = true;
         animator.SetBool("Is Meow", isMeow);
