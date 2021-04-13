@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RayCastPlayer : MonoBehaviour
 {
-    private Camera _camera;
+    [HideInInspector] public Camera _camera;
     public GameManager gameManager;
 
     private void Start()
@@ -29,6 +29,18 @@ public class RayCastPlayer : MonoBehaviour
                 {
                     active.Active();
                 }
+                return;
+            }
+
+
+            var activeForSafe = hit.transform.gameObject.GetComponent<ISafeInteractive>();
+
+            if (activeForSafe != null)
+            {
+                gameManager.SetInteractableAnim(true);
+
+                if (Input.GetKeyDown(KeyCode.E))
+                    activeForSafe.Active(_camera);
             }
         }
         else

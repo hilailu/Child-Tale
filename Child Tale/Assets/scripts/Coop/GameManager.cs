@@ -20,6 +20,20 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public static bool isLoading;
 
+    [SerializeField] Animator endGameAnimator;
+    [SerializeField] GameObject endGameCanvas;
+
+    #region Singleton
+    public static GameManager instance;
+    private void Awake()
+    {
+        if (instance != null)
+            return;
+        instance = this;
+    }
+    #endregion
+
+
     // Start Method
 
     private void Start()
@@ -47,7 +61,7 @@ public class GameManager : MonoBehaviourPunCallbacks
                 //player1.gameObject.name = player1.GetComponent<PhotonView>().Owner.NickName;
 
                 player1.GetComponentInChildren<RayCastPlayer>().gameManager = this;
-                
+
             }
             else
             {
@@ -88,15 +102,11 @@ public class GameManager : MonoBehaviourPunCallbacks
                 Cursor.visible = true;
                 isPaused = true;
                 if (PhotonNetwork.OfflineMode)
-                    Time.timeScale = 0f;
+                    Time.timeScale = 1f;
             }
         }
     }
 
-    public void ToMenu()
-    {
-        SceneManager.LoadScene(0);
-    }
 
     public void SetInteractableAnim(bool bol)
     {
@@ -104,12 +114,34 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
 
 
+    public void ToMenu()
+    {
+        PhotonNetwork.LoadLevel(0);
+        PhotonNetwork.LeaveRoom();
+    }
+
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         Debug.Log("onplayerleftroom");
-        if (PhotonNetwork.IsMasterClient)
+        if (otherPlayer.IsMasterClient)
         {
             PhotonNetwork.LoadLevel(0);
         }
+    }
+
+
+
+    public void EndGame()
+    {
+        endGameCanvas.SetActive(true);
+        endGameAnimator.SetBool("End Game", true);
+        isPaused = true;
+        StartCoroutine(LoadMenuRoutine());
+    }
+
+    System.Collections.IEnumerator LoadMenuRoutine()
+    {
+        yield return new WaitForSeconds(20);
+        SceneManager.LoadScene(0);
     }
 }

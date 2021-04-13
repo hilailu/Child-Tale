@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 [AddComponentMenu("Breakable Windows/Breakable Window")]
 [RequireComponent(typeof(AudioSource))]
 public class BreakableWindow : MonoBehaviour, IInteractable
 {
     [SerializeField] AudioSource soundeFromWindow;
+    private PhotonView PV;
+
 
     
     [Tooltip("Layer should be TransparentFX or your own layer for breakable windows.")]
@@ -51,6 +54,10 @@ public class BreakableWindow : MonoBehaviour, IInteractable
 
     void Start()
     {
+        PV = GetComponent<PhotonView>();
+
+
+
         if (preCalculate == true && allreadyCalculated == false)
         {
             bakeVertices();
@@ -255,7 +262,19 @@ public class BreakableWindow : MonoBehaviour, IInteractable
         }        
     }
 
+
+
+
     public void Active()
+    {
+        if (PhotonNetwork.OfflineMode)
+            Break();
+        else
+            PV.RPC("Break", RpcTarget.All);
+    }
+
+    [PunRPC]
+    void Break()
     {
         breakWindow();
         soundeFromWindow.volume = 0.8f;

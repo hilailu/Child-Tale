@@ -35,6 +35,12 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
+  - m_GUID: b1c407fa8cf86fc4b8e56507aa480cf1
+    m_Address: End Game Shared Data
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: c72cee3c7f7d4fa438372b5a4c185251, type: 2}
   m_SchemaSet:

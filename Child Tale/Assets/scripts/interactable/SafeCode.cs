@@ -3,27 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.IO;
+using Photon.Pun;
 
-public class SafeCode : MonoBehaviour, IInteractable, ISaveable
+public class SafeCode : MonoBehaviour, ISafeInteractive, ISaveable
 {
     public TMP_Text inputField;
     [SerializeField] Animator animator;
-    [SerializeField] PlayerController player;
     [SerializeField] AudioSource audioSource;
     [SerializeField] Transform pointForCamera;
+    private PhotonView PV;
+    private Camera cameraFromPlayer;
 
     private string answer = "12345";
-    public int maxNumbers = 7;
-
-    public static bool isActive = false;
-    public static bool isMoving = false;
-
+    [HideInInspector] public int maxNumbers = 7;
 
     private Vector3 startPointCameraPos;
     private Quaternion startPointCameraQuat;
 
-    public bool isOpened = false;
+    public static bool isActive = false;
+    [HideInInspector] public bool isOpened = false;
+    private bool isSomebodyUse = false;
+
+
+    private void Start()
+    {
+        PV = GetComponent<PhotonView>();
+    }
 
     public void checkAnswer()
     {
@@ -44,23 +49,31 @@ public class SafeCode : MonoBehaviour, IInteractable, ISaveable
     public void ClearInput()
         => inputField.text = string.Empty;
 
-    public void Active()
+    public void Active(Camera camera)
     {
-        startPointCameraPos = player.cameraMain.transform.position;
-        startPointCameraQuat = player.cameraMain.transform.rotation;
+        if (isSomebodyUse) return;
+
+        if (!PhotonNetwork.OfflineMode)
+            PV.RPC("SetUseable", RpcTarget.Others, true);
+
+
+        startPointCameraPos = camera.transform.position;
+        startPointCameraQuat = camera.transform.rotation;
 
         isActive = true;
         Cursor.visible = true;
         GameManager.isPaused = true;
         Cursor.lockState = CursorLockMode.None;
+
+        cameraFromPlayer = camera;
     }
 
     private void Update()
     {
         if (isActive && GameManager.isPaused)
         {
-            player.cameraMain.transform.position = Vector3.Lerp(player.cameraMain.transform.position, pointForCamera.position, Time.deltaTime * 2);
-            player.cameraMain.transform.rotation = Quaternion.Lerp(player.cameraMain.transform.rotation, pointForCamera.rotation, Time.deltaTime * 2);
+            cameraFromPlayer.transform.position = Vector3.Lerp(cameraFromPlayer.transform.position, pointForCamera.position, Time.deltaTime * 2);
+            cameraFromPlayer.transform.rotation = Quaternion.Lerp(cameraFromPlayer.transform.rotation, pointForCamera.rotation, Time.deltaTime * 2);
         }
 
         if (isActive && Input.GetKeyDown(KeyCode.Escape))
@@ -68,8 +81,8 @@ public class SafeCode : MonoBehaviour, IInteractable, ISaveable
             StartCoroutine(aaa());
             GameManager.isPaused = false;
 
-            player.cameraMain.transform.position = startPointCameraPos;
-            player.cameraMain.transform.rotation = startPointCameraQuat;
+            cameraFromPlayer.transform.position = startPointCameraPos;
+            cameraFromPlayer.transform.rotation = startPointCameraQuat;
         }
     }
 
@@ -79,26 +92,36 @@ public class SafeCode : MonoBehaviour, IInteractable, ISaveable
         isActive = false;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        if (!PhotonNetwork.OfflineMode)
+            PV.RPC("SetUseable", RpcTarget.Others, false);
     }
+
+    [PunRPC]
+    void SetUseable(bool bol)
+        => isSomebodyUse = bol;
+
+
 
     public void Save()
     {
-        PlayerData.instance.isSafeOpened = isOpened;
         Debug.Log("Save Safe");
-        string player = JsonUtility.ToJson(PlayerData.instance, true);
-        File.WriteAllText(Application.persistentDataPath + "/PlayerData.json", player);
+        PlayerPrefs.SetString("SafeJSON", JsonUtility.ToJson(this, true));
+        PlayerPrefs.Save();
     }
 
     public void Load()
     {
         Debug.Log("Load Safe");
-        JsonUtility.FromJsonOverwrite(File.ReadAllText(Application.persistentDataPath + "/PlayerData.json"), PlayerData.instance);
-        if (PlayerData.instance.isSafeOpened)
-        {
-            isOpened = true;
-            animator.Play("openedsafe");
-        }
+        JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("SafeJSON"), this);
+        if (isOpened)
+            animator.SetTrigger("Open");
         else
             animator.Play("New State");
+    }
+
+    public void DeleteSave()
+    {
+        PlayerPrefs.DeleteKey("SafeJSON");
     }
 }

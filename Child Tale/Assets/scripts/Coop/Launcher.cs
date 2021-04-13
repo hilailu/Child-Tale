@@ -28,8 +28,6 @@ public class Launcher : MonoBehaviourPunCallbacks
         PlayerPrefs.DeleteAll();
 
         buttonLoadArena.SetActive(false);
-
-        //ConnectToPhoton();
     }
 
     private void Awake()
@@ -52,7 +50,15 @@ public class Launcher : MonoBehaviourPunCallbacks
     // Tutorial Methods
 
     public void Disconect()
-        => PhotonNetwork.Disconnect();
+    {
+        PhotonNetwork.Disconnect();
+
+        buttonLoadArena.SetActive(false);
+        buttonJoinRoom.SetActive(true);
+        buttonCreateRoom.SetActive(true);
+        connectionStatus.text = string.Empty;
+        connectionStatus.color = Color.white;
+    }
 
     public void ConnectToPhoton()
     {
@@ -84,7 +90,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void LoadArena()
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount > 0)
+        if (PhotonNetwork.CurrentRoom.PlayerCount > 1)
         {
             PhotonNetwork.LoadLevel(1);
         }
@@ -100,6 +106,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         connectionStatus.text = "connected to server";
         connectionStatus.color = Color.yellow;
         buttonLoadArena.SetActive(false);
+        PhotonNetwork.OfflineMode = false;
     }
 
     public override void OnDisconnected(DisconnectCause cause)
@@ -107,6 +114,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         //isConnecting = false;
         //controlPanel.SetActive(true);
         Debug.Log("disconnected");
+        PhotonNetwork.OfflineMode = true;
     }
 
     public override void OnJoinedRoom()
@@ -116,12 +124,6 @@ public class Launcher : MonoBehaviourPunCallbacks
             buttonLoadArena.SetActive(true);
             buttonJoinRoom.SetActive(false);
             buttonCreateRoom.SetActive(false);
-            //playerStatus.text = "you are lobby leader";
-        }
-        else
-        {
-            //playerStatus.text = "connected to lobby";
         }
     }
-
 }

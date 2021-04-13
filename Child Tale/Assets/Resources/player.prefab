@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52abbc7571b09094882c379269ab3441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _camera: {fileID: 0}
   gameManager: {fileID: 0}
 --- !u!1 &4437357654503026271
 GameObject:
@@ -251,8 +252,6 @@ MonoBehaviour:
   speed: 6
   gravity: -9.8
   jumpForce: 3.5
-  pos: {x: 0, y: 0, z: 0}
-  rot: {x: 0, y: 0, z: 0, w: 0}
   photonView: {fileID: 0}
   nickName: 
 --- !u!143 &4437357655123530169
