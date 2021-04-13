@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     [SerializeField] private Animator _interactAnimator;
 
+    public static bool isLoading;
+
     // Start Method
 
     private void Start()
@@ -91,6 +93,10 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
     }
 
+    public void ToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
 
     public void SetInteractableAnim(bool bol)
     {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.IO;
 
 public class SafeCode : MonoBehaviour, IInteractable, ISaveable
 {
@@ -82,23 +83,22 @@ public class SafeCode : MonoBehaviour, IInteractable, ISaveable
 
     public void Save()
     {
+        PlayerData.instance.isSafeOpened = isOpened;
         Debug.Log("Save Safe");
-        PlayerPrefs.SetString("SafeJSON", JsonUtility.ToJson(this, true));
-        PlayerPrefs.Save();
+        string player = JsonUtility.ToJson(PlayerData.instance, true);
+        File.WriteAllText(Application.persistentDataPath + "/PlayerData.json", player);
     }
 
     public void Load()
     {
         Debug.Log("Load Safe");
-        JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("SafeJSON"), this);
-        if (isOpened)
+        JsonUtility.FromJsonOverwrite(File.ReadAllText(Application.persistentDataPath + "/PlayerData.json"), PlayerData.instance);
+        if (PlayerData.instance.isSafeOpened)
+        {
+            isOpened = true;
             animator.SetTrigger("Open");
+        }
         else
             animator.Play("New State");
-    }
-
-    public void DeleteSave()
-    {
-        PlayerPrefs.DeleteKey("SafeJSON");
     }
 }

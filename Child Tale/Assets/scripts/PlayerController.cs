@@ -16,8 +16,6 @@ public class PlayerController : MonoBehaviour, ISaveable, IPunObservable
     public float speed = 6f;
     public float gravity = -9.8f;
     public float jumpForce = 10f;
-    public Vector3 pos;
-    public Quaternion rot;
 
     private float minMaxVert = 60f;
     private float _rotationX = 0;
@@ -87,9 +85,6 @@ public class PlayerController : MonoBehaviour, ISaveable, IPunObservable
 
 
 
-            pos = transform.position;
-            rot = transform.rotation;
-
 
             if (Input.GetKey(KeyCode.Z))
             {
@@ -103,22 +98,21 @@ public class PlayerController : MonoBehaviour, ISaveable, IPunObservable
 
     public void Save()
     {
+        PlayerData.instance.nickName = this.nickName;
+        PlayerData.instance.pos = this.transform.position;
+        PlayerData.instance.rot = this.transform.rotation;
         Debug.Log("Save Player");
-        PlayerPrefs.SetString("PlayerJSON", JsonUtility.ToJson(this, true));
-        PlayerPrefs.Save();
+        string player = JsonUtility.ToJson(PlayerData.instance, true);
+        File.WriteAllText(Application.persistentDataPath + "/PlayerData.json", player);
     }
 
     public void Load()
     {
         Debug.Log("Load Player");
-        JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("PlayerJSON"), this);
-        transform.position = pos;
-        transform.rotation = rot;
-    }
-
-    public void DeleteSave()
-    {
-        PlayerPrefs.DeleteKey("PlayerJSON");
+        JsonUtility.FromJsonOverwrite(File.ReadAllText(Application.persistentDataPath + "/PlayerData.json"), PlayerData.instance);
+        this.nickName = PlayerData.instance.nickName;
+        this.transform.position = PlayerData.instance.pos;
+        this.transform.rotation = PlayerData.instance.rot;
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

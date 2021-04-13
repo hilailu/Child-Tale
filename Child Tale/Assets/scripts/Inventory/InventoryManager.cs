@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour, ISaveable
@@ -38,7 +39,7 @@ public class InventoryManager : MonoBehaviour, ISaveable
             }
             else
             {
-                inventoryItems[i].Remove();
+                inventoryItems[i]?.Remove();
             }
         }
     }
@@ -61,20 +62,17 @@ public class InventoryManager : MonoBehaviour, ISaveable
 
     public void Save()
     {
+        PlayerData.instance.items = new List<Item>(this.items);
         Debug.Log("Save Inventory");
-        PlayerPrefs.SetString("InventoryJSON", JsonUtility.ToJson(this, true));
-        PlayerPrefs.Save();
+        string player = JsonUtility.ToJson(PlayerData.instance, true);
+        File.WriteAllText(Application.persistentDataPath + "/PlayerData.json", player);
     }
 
     public void Load()
     {
         Debug.Log("Load Inventory");
-        JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("InventoryJSON"), this);
+        JsonUtility.FromJsonOverwrite(File.ReadAllText(Application.persistentDataPath + "/PlayerData.json"), PlayerData.instance);
+        this.items = new List<Item>(PlayerData.instance.items);
         OnInventoryChanged?.Invoke();
-    }
-
-    public void DeleteSave()
-    {
-        PlayerPrefs.DeleteKey("InventoryJSON");
     }
 }

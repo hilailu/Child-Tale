@@ -13,7 +13,12 @@ public class SaveSystem : MonoBehaviour
         {
             saves.Add(item.GetComponent<ISaveable>());
         }
+        if (GameManager.isLoading == true)
+        {           
+            Load();
+        }
     }
+
     public void Load()
     {
         print("load");
@@ -29,15 +34,6 @@ public class SaveSystem : MonoBehaviour
         foreach (var save in saves)
         {
             save.Save();
-        }
-    }
-
-    public void DeleteSave()
-    {
-        print("delete save");
-        foreach (var save in saves)
-        {
-            save.DeleteSave();
         }
     }
 
