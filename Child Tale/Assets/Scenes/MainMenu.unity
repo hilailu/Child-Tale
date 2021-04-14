@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465788, g: 0.49641412, b: 0.57481503, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.49641466, b: 0.5748159, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4827,7 +4827,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: GUID:18a2a0c807cadbe4eac04da1826f86c2
     m_TableEntryReference:
-      m_KeyId: 2274778764083200
+      m_KeyId: 4259185729273856
       m_Key: 
     m_FallbackState: 0
   m_FormatArguments: []

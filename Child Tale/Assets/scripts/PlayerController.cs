@@ -92,8 +92,8 @@ public class PlayerController : MonoBehaviour, ISaveable, IPunObservable
             }
             else isRed = false;
         }
-        if (isRed) GetComponent<MeshRenderer>().material.color = Color.red;
-        else GetComponent<MeshRenderer>().material.color = Color.white;
+        //if (isRed) GetComponent<MeshRenderer>().material.color = Color.red;
+        //else GetComponent<MeshRenderer>().material.color = Color.white;
     }
 
     public void Save()

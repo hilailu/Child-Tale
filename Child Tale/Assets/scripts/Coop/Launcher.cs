@@ -57,7 +57,6 @@ public class Launcher : MonoBehaviourPunCallbacks
         buttonJoinRoom.SetActive(true);
         buttonCreateRoom.SetActive(true);
         connectionStatus.text = string.Empty;
-        connectionStatus.color = Color.white;
     }
 
     public void ConnectToPhoton()
@@ -65,6 +64,8 @@ public class Launcher : MonoBehaviourPunCallbacks
         connectionStatus.text = "connecting...";
         PhotonNetwork.GameVersion = gameVersion;
         PhotonNetwork.ConnectUsingSettings();
+
+        connectionStatus.color = Color.white;
     }
 
     public void CreateRoom()
@@ -90,7 +91,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void LoadArena()
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount > 1)
+        if (PhotonNetwork.CurrentRoom.PlayerCount > 0)
         {
             PhotonNetwork.LoadLevel(1);
         }
@@ -111,8 +112,6 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnDisconnected(DisconnectCause cause)
     {
-        //isConnecting = false;
-        //controlPanel.SetActive(true);
         Debug.Log("disconnected");
         PhotonNetwork.OfflineMode = true;
     }

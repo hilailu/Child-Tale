@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviourPunCallbacks
                 Cursor.visible = true;
                 isPaused = true;
                 if (PhotonNetwork.OfflineMode)
-                    Time.timeScale = 1f;
+                    Time.timeScale = 0f;
             }
         }
     }

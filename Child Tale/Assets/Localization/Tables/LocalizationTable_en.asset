@@ -86,5 +86,9 @@ MonoBehaviour:
     m_Localized: Continue Game
     m_Metadata:
       m_Items: []
+  - m_Id: 4259185729273856
+    m_Localized: load level
+    m_Metadata:
+      m_Items: []
   references:
     version: 1
