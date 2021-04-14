@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 public class CustomTime : MonoBehaviour, ISaveable
@@ -43,15 +42,10 @@ public class CustomTime : MonoBehaviour, ISaveable
     { 
         PlayerData.instance.hours = hours;
         PlayerData.instance.minutes = minutes;
-        Debug.Log("Save Time");
-        string player = JsonUtility.ToJson(PlayerData.instance, true);
-        File.WriteAllText(Application.persistentDataPath + "/PlayerData.json", player);
     }
 
     public void Load()
     {
-        Debug.Log("Load Time");
-        JsonUtility.FromJsonOverwrite(File.ReadAllText(Application.persistentDataPath + "/PlayerData.json"), PlayerData.instance);
         minutes = PlayerData.instance.minutes;
         hours = PlayerData.instance.hours;
     }

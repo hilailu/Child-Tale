@@ -2063,8 +2063,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1SpawnPosition: {fileID: 1114040580}
   player2SpawnPosition: {fileID: 40919614}
-  singlePlayer: {fileID: 0}
+  singlePlayer: {fileID: 269554659}
   pause: {fileID: 4373584633463461219}
+  video: {fileID: 1301583612}
+  listener: {fileID: 342924698}
   _interactAnimator: {fileID: 154577653}
   endGameAnimator: {fileID: 33319823}
   endGameCanvas: {fileID: 33319821}
@@ -3036,6 +3038,11 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.9, y: 4.7, z: 3.5}
   m_Center: {x: 1.950002, y: 2.35, z: 1.75}
+--- !u!81 &342924698 stripped
+AudioListener:
+  m_CorrespondingSourceObject: {fileID: 4437357653924804711, guid: 67cd8180120348f42bab4edad348e063, type: 3}
+  m_PrefabInstance: {fileID: 269554658}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &351352809
 GameObject:
   m_ObjectHideFlags: 0
@@ -11967,6 +11974,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items: []
   inventoryItems: []
+  itemsInScene: []
 --- !u!114 &1455604647
 MonoBehaviour:
   m_ObjectHideFlags: 0

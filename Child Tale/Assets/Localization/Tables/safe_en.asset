@@ -26,5 +26,13 @@ MonoBehaviour:
     m_Localized: delete
     m_Metadata:
       m_Items: []
+  - m_Id: 2433253113765888
+    m_Localized: Success
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2433293936926720
+    m_Localized: Error
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

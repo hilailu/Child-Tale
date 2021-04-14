@@ -11,8 +11,6 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private AudioMixer mixer;
     [SerializeField] Launcher launcher;
-    [SerializeField] private Button newGame;
-    [SerializeField] private Button continueGame;
     [SerializeField] private TMP_Text newOrContinue;
     private LocalizedString newOrNot = new LocalizedString { TableReference = "UI Text", TableEntryReference = "New"};
 

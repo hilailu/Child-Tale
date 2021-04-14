@@ -3,6 +3,7 @@ using Photon.Realtime;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
 using Photon.Pun.Demo.PunBasics;
+using UnityEngine.Video;
 
 public class GameManager : MonoBehaviourPunCallbacks
 {
@@ -14,10 +15,12 @@ public class GameManager : MonoBehaviourPunCallbacks
     private GameObject player2;
 
     [SerializeField] private GameObject pause;
-    public static bool isPaused;
-
+    [SerializeField] private VideoPlayer video;
+    [SerializeField] private AudioListener listener;
     [SerializeField] private Animator _interactAnimator;
 
+
+    public static bool isPaused;
     public static bool isLoading;
 
     [SerializeField] Animator endGameAnimator;
@@ -93,6 +96,9 @@ public class GameManager : MonoBehaviourPunCallbacks
                 }
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
+                if (video.isPaused)
+                    video.Play();
+                AudioListener.pause = false;
                 Time.timeScale = 1f;
                 isPaused = false;
             }
@@ -100,6 +106,9 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+                if (video.isPlaying)
+                    video.Pause();
+                AudioListener.pause = true;
                 isPaused = true;
                 if (PhotonNetwork.OfflineMode)
                     Time.timeScale = 0f;

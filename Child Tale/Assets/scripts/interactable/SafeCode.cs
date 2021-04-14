@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Photon.Pun;
+using UnityEngine.Localization;
 
 public class SafeCode : MonoBehaviour, ISafeInteractive, ISaveable
 {
@@ -24,10 +25,17 @@ public class SafeCode : MonoBehaviour, ISafeInteractive, ISaveable
     [HideInInspector] public bool isOpened = false;
     private bool isSomebodyUse = false;
 
+    private LocalizedString safe = new LocalizedString { TableReference = "safe" };
+
+    void UpdateString(string translatedValue)
+    {
+        inputField.text = translatedValue;
+    }
 
     private void Start()
     {
         PV = GetComponent<PhotonView>();
+        safe.StringChanged += UpdateString;
     }
 
     public void checkAnswer()
@@ -37,12 +45,12 @@ public class SafeCode : MonoBehaviour, ISafeInteractive, ISaveable
         {
             isOpened = true;
             animator.SetTrigger("Open");
-            inputField.text = "\u2713"; // ✓
+            safe.TableEntryReference = "success";
             audioSource.Play();
         }
         else
         {
-            inputField.text = "\u274C"; //❌
+            safe.TableEntryReference = "error";
         }
     }
 
@@ -105,23 +113,17 @@ public class SafeCode : MonoBehaviour, ISafeInteractive, ISaveable
 
     public void Save()
     {
-        Debug.Log("Save Safe");
-        PlayerPrefs.SetString("SafeJSON", JsonUtility.ToJson(this, true));
-        PlayerPrefs.Save();
+        PlayerData.instance.isSafeOpened = isOpened;
     }
 
     public void Load()
     {
-        Debug.Log("Load Safe");
-        JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("SafeJSON"), this);
-        if (isOpened)
-            animator.SetTrigger("Open");
+        if (PlayerData.instance.isSafeOpened)
+        {
+            isOpened = true;
+            animator.Play("openedsafe");
+        }
         else
             animator.Play("New State");
-    }
-
-    public void DeleteSave()
-    {
-        PlayerPrefs.DeleteKey("SafeJSON");
     }
 }

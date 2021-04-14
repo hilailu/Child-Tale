@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour, ISaveable
@@ -22,8 +21,14 @@ public class InventoryManager : MonoBehaviour, ISaveable
 
     public Action OnInventoryChanged;
 
+    public List<InteractItem> itemsInScene = new List<InteractItem>();
+
     void Start()
     {
+        // Лист интерактивных предметов в сцене
+        InteractItem[] items = (InteractItem[])FindObjectsOfType(typeof(InteractItem));
+        itemsInScene = new List<InteractItem>(items);
+
         instance.OnInventoryChanged += UpdateUI;
         inventoryItems = GetComponentsInChildren<InventoryItem>(true);
         UpdateUI();
@@ -63,15 +68,10 @@ public class InventoryManager : MonoBehaviour, ISaveable
     public void Save()
     {
         PlayerData.instance.items = new List<Item>(this.items);
-        Debug.Log("Save Inventory");
-        string player = JsonUtility.ToJson(PlayerData.instance, true);
-        File.WriteAllText(Application.persistentDataPath + "/PlayerData.json", player);
     }
 
     public void Load()
     {
-        Debug.Log("Load Inventory");
-        JsonUtility.FromJsonOverwrite(File.ReadAllText(Application.persistentDataPath + "/PlayerData.json"), PlayerData.instance);
         this.items = new List<Item>(PlayerData.instance.items);
         OnInventoryChanged?.Invoke();
     }

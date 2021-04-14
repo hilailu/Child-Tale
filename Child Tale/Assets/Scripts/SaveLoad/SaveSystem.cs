@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class SaveSystem : MonoBehaviour
@@ -21,7 +22,7 @@ public class SaveSystem : MonoBehaviour
 
     public void Load()
     {
-        print("load");
+        JsonUtility.FromJsonOverwrite(File.ReadAllText(Application.persistentDataPath + "/PlayerData.json"), PlayerData.instance);
         foreach (var save in saves)
         {
             save.Load();
@@ -30,11 +31,12 @@ public class SaveSystem : MonoBehaviour
 
     public void Save()
     {
-        print("save");
         foreach (var save in saves)
         {
             save.Save();
         }
+        string player = JsonUtility.ToJson(PlayerData.instance, true);
+        File.WriteAllText(Application.persistentDataPath + "/PlayerData.json", player);
     }
 
 }

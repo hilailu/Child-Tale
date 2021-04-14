@@ -1,5 +1,4 @@
 using Photon.Pun;
-using System.IO;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, ISaveable, IPunObservable
@@ -98,19 +97,12 @@ public class PlayerController : MonoBehaviour, ISaveable, IPunObservable
 
     public void Save()
     {
-        PlayerData.instance.nickName = this.nickName;
         PlayerData.instance.pos = this.transform.position;
         PlayerData.instance.rot = this.transform.rotation;
-        Debug.Log("Save Player");
-        string player = JsonUtility.ToJson(PlayerData.instance, true);
-        File.WriteAllText(Application.persistentDataPath + "/PlayerData.json", player);
     }
 
     public void Load()
     {
-        Debug.Log("Load Player");
-        JsonUtility.FromJsonOverwrite(File.ReadAllText(Application.persistentDataPath + "/PlayerData.json"), PlayerData.instance);
-        this.nickName = PlayerData.instance.nickName;
         this.transform.position = PlayerData.instance.pos;
         this.transform.rotation = PlayerData.instance.rot;
     }
