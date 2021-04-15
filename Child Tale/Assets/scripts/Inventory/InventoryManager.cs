@@ -21,14 +21,8 @@ public class InventoryManager : MonoBehaviour, ISaveable
 
     public Action OnInventoryChanged;
 
-    public List<InteractItem> itemsInScene = new List<InteractItem>();
-
     void Start()
     {
-        // Лист интерактивных предметов в сцене
-        InteractItem[] items = (InteractItem[])FindObjectsOfType(typeof(InteractItem));
-        itemsInScene = new List<InteractItem>(items);
-
         instance.OnInventoryChanged += UpdateUI;
         inventoryItems = GetComponentsInChildren<InventoryItem>(true);
         UpdateUI();

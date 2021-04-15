@@ -55,6 +55,7 @@ public class MainMenu : MonoBehaviour
     public void DeleteProgress()
     {
         File.Delete(Application.persistentDataPath + "/PlayerData.json");
+        //InteractItemSet.CollectedItems.Clear();
         newOrNot.TableEntryReference = "New";
     }
 

@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     private void Start()
     {
         isPaused = false;
+        AudioListener.pause = false;
 
         if (PhotonNetwork.OfflineMode) return;
 

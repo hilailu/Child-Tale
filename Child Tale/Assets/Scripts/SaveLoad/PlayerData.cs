@@ -21,5 +21,5 @@ public class PlayerData : MonoBehaviour
     public bool isSafeOpened;
     public float minutes;
     public float hours;
-
+    public string[] CollectedItems;
 }
