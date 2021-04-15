@@ -44,7 +44,11 @@ public class GameManager : MonoBehaviourPunCallbacks
         isPaused = false;
         AudioListener.pause = false;
 
-        if (PhotonNetwork.OfflineMode) return;
+        if (PhotonNetwork.OfflineMode)
+        {
+            singlePlayer.SetActive(true);
+            return;
+        }
 
         if (!PhotonNetwork.IsConnected)
         {
@@ -54,7 +58,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         if (PlayerManager.LocalPlayerInstance == null)
         {
-            Destroy(singlePlayer);
+            singlePlayer.SetActive(false);
 
             if (PhotonNetwork.IsMasterClient)
             {
@@ -126,8 +130,15 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public void ToMenu()
     {
-        PhotonNetwork.LoadLevel(0);
-        PhotonNetwork.LeaveRoom();
+        if (PhotonNetwork.OfflineMode)
+            SceneManager.LoadScene(0);
+        else
+        {
+            if (PhotonNetwork.IsMasterClient)
+                PhotonNetwork.LoadLevel(0);
+            else
+                PhotonNetwork.LeaveRoom();
+        }
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -135,10 +146,17 @@ public class GameManager : MonoBehaviourPunCallbacks
         Debug.Log("onplayerleftroom");
         if (otherPlayer.IsMasterClient)
         {
-            PhotonNetwork.LoadLevel(0);
+            // PhotonNetwork.LoadLevel(0);
+            SceneManager.LoadScene(0);
         }
     }
 
+
+    public override void OnLeftRoom()
+    {
+        SceneManager.LoadScene(0);
+        PhotonNetwork.Disconnect();
+    }
 
 
     public void EndGame()

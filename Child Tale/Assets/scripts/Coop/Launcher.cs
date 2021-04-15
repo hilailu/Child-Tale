@@ -63,9 +63,12 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         connectionStatus.text = "connecting...";
         PhotonNetwork.GameVersion = gameVersion;
+        connectionStatus.color = Color.white;
+
+        if (PhotonNetwork.IsConnected)
+            PhotonNetwork.Disconnect();
         PhotonNetwork.ConnectUsingSettings();
 
-        connectionStatus.color = Color.white;
     }
 
     public void CreateRoom()
@@ -86,12 +89,15 @@ public class Launcher : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.LocalPlayer.NickName = playerName;
             PhotonNetwork.JoinRoom(roomName);
+            connectionStatus.text = $"You was join to room \"{roomName}\"";
         }
+        else
+            connectionStatus.text = "You are not connected";
     }
 
     public void LoadArena()
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount > 0)
+        if (PhotonNetwork.CurrentRoom.PlayerCount > 1)
         {
             PhotonNetwork.LoadLevel(1);
         }

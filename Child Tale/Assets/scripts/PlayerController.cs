@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour, ISaveable, IPunObservable
     private CharacterController _characterController;
     [SerializeField] private Transform sphereCheck;
     [SerializeField] private LayerMask groundLayer;
+    private Phone phone;
     private Vector3 velocity;
 
     private bool isGrounded;
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour, ISaveable, IPunObservable
         photonView = GetComponent<PhotonView>();
         cameraMain = GetComponentInChildren<Camera>();
         _characterController = GetComponent<CharacterController>();
+        phone = GetComponentInChildren<Phone>();
 
 
         // Закрепление курсора в центре экрана и отключение его видимости
@@ -37,13 +39,13 @@ public class PlayerController : MonoBehaviour, ISaveable, IPunObservable
         if (!photonView.IsMine)
         {
             Destroy(cameraMain.gameObject);
-            Destroy(GetComponentInChildren<Phone>().gameObject);
+            //Destroy(GetComponentInChildren<Phone>().gameObject);
         }
     }
 
     void Update()
     {
-        if (photonView.IsMine && !Phone.phone && !GameManager.isPaused)
+        if (photonView.IsMine && !phone.phone && !GameManager.isPaused)
         {
             // Поворот камеры вокруг оси X
             _rotationX -= Input.GetAxis("Mouse Y") * sensetiveMouse;
@@ -91,8 +93,8 @@ public class PlayerController : MonoBehaviour, ISaveable, IPunObservable
             }
             else isRed = false;
         }
-        //if (isRed) GetComponent<MeshRenderer>().material.color = Color.red;
-        //else GetComponent<MeshRenderer>().material.color = Color.white;
+        if (isRed) GetComponent<MeshRenderer>().material.color = Color.red;
+        else GetComponent<MeshRenderer>().material.color = Color.white;
     }
 
     public void Save()
