@@ -1,15 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
 public class CatWalk : MonoBehaviour, IInteractable
 {
-    private float speed = 3f;
     [SerializeField] Animator animator;
     private AudioSource meowAudio;
     private PhotonView PV;
 
+    private float speed = 3f;
     private bool isMeow = false;
 
     private void Start()
@@ -44,6 +43,7 @@ public class CatWalk : MonoBehaviour, IInteractable
     }
 
 
+    // Умный кот
     void Update()
     {
         if (!isMeow)
@@ -64,8 +64,10 @@ public class CatWalk : MonoBehaviour, IInteractable
     IEnumerator MeowSomeTimesRoutine()
     {
         yield return new WaitForSeconds(Random.Range(8f, 12f));
+
         if (!isMeow)
             meowAudio.Play();
+
         StartCoroutine(MeowSomeTimesRoutine());
     }
 }

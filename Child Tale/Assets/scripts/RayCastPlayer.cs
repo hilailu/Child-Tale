@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RayCastPlayer : MonoBehaviour
@@ -26,9 +24,8 @@ public class RayCastPlayer : MonoBehaviour
                 gameManager.SetInteractableAnim(true);
 
                 if (Input.GetKeyDown(KeyCode.E))
-                {
                     active.Active();
-                }
+
                 return;
             }
 

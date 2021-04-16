@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -17,8 +15,8 @@ public class TV : MonoBehaviour, IInteractable
     {
         video = GetComponent<VideoPlayer>();
         img = GetComponentInChildren<RawImage>();
-        img.enabled = false;
         PV = GetComponent<PhotonView>();
+        img.enabled = false;
     }
     public void Active()
     {

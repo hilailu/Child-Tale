@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Realtime;
 using UnityEngine.UI;
@@ -21,12 +19,10 @@ public class Launcher : MonoBehaviourPunCallbacks
     string playerName = string.Empty;
     string roomName = string.Empty;
 
-    // Start Method
+  
 
     private void Start()
     {
-        //PlayerPrefs.DeleteAll();
-
         buttonLoadArena.SetActive(false);
     }
 
@@ -34,8 +30,6 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.AutomaticallySyncScene = true;
     }
-
-    // Helper Methods
 
     public void SetPlayerName(string name)
     {
@@ -47,28 +41,23 @@ public class Launcher : MonoBehaviourPunCallbacks
         roomName = name;
     }
 
-    // Tutorial Methods
-
     public void Disconect()
     {
         PhotonNetwork.Disconnect();
 
-        buttonLoadArena.SetActive(false);
-        buttonJoinRoom.SetActive(true);
-        buttonCreateRoom.SetActive(true);
+        ActiveLoadButton(false);
         connectionStatus.text = string.Empty;
     }
 
     public void ConnectToPhoton()
     {
         connectionStatus.text = "connecting...";
-        PhotonNetwork.GameVersion = gameVersion;
         connectionStatus.color = Color.white;
+        PhotonNetwork.GameVersion = gameVersion;
 
         if (PhotonNetwork.IsConnected)
             PhotonNetwork.Disconnect();
         PhotonNetwork.ConnectUsingSettings();
-
     }
 
     public void CreateRoom()
@@ -105,6 +94,13 @@ public class Launcher : MonoBehaviourPunCallbacks
             connectionStatus.text = "Need minimum 2 players connected";
     }
 
+    private void ActiveLoadButton(bool avtive)
+    {
+        buttonLoadArena.SetActive(avtive);
+        buttonJoinRoom.SetActive(!avtive);
+        buttonCreateRoom.SetActive(!avtive);
+    }
+
     // Photon Methods
 
     public override void OnConnected()
@@ -126,9 +122,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            buttonLoadArena.SetActive(true);
-            buttonJoinRoom.SetActive(false);
-            buttonCreateRoom.SetActive(false);
+            ActiveLoadButton(true);
         }
     }
 }

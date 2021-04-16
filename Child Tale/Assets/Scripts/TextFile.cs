@@ -23,6 +23,7 @@ public class TextFile : MonoBehaviour, IPointerClickHandler
         {
             isFileOpen = true;
             file.SetActive(true);
+
             if(!string.IsNullOrEmpty(filetext))
                 input.text = filetext;
         }

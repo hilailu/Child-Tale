@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour, ISaveable, IPunObservable
     private Vector3 velocity;
 
     private bool isGrounded;
+    private bool isRed;
 
     public float sensetiveMouse = 9f;
     public float speed = 6f;
@@ -21,26 +22,26 @@ public class PlayerController : MonoBehaviour, ISaveable, IPunObservable
     private float _rotationX = 0;
 
     public PhotonView photonView;
-    public string nickName;
 
-    void Start()
+
+    private void Awake()
     {
         photonView = GetComponent<PhotonView>();
         cameraMain = GetComponentInChildren<Camera>();
         _characterController = GetComponent<CharacterController>();
         phone = GetComponentInChildren<Phone>();
+    }
 
-
+    void Start()
+    {
         // Закрепление курсора в центре экрана и отключение его видимости
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
 
+        // Удаление второй камеры и аудиолистенера
         if (!photonView.IsMine)
-        {
             Destroy(cameraMain.gameObject);
-            //Destroy(GetComponentInChildren<Phone>().gameObject);
-        }
     }
 
     void Update()
@@ -86,7 +87,7 @@ public class PlayerController : MonoBehaviour, ISaveable, IPunObservable
 
 
 
-
+            // Test
             if (Input.GetKey(KeyCode.Z))
             {
                 isRed = true;
@@ -120,5 +121,4 @@ public class PlayerController : MonoBehaviour, ISaveable, IPunObservable
             isRed = (bool)stream.ReceiveNext();
         }
     }
-    bool isRed;
 }

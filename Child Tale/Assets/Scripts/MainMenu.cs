@@ -25,8 +25,8 @@ public class MainMenu : MonoBehaviour
         GameManager.isLoading = false;
         GameManager.isPaused = false;
         Time.timeScale = 1f;
-        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         AudioListener.pause = false;
         newOrNot.StringChanged += UpdateString;
     }
@@ -48,10 +48,12 @@ public class MainMenu : MonoBehaviour
     public void Play()
     {
         Photon.Pun.PhotonNetwork.OfflineMode = true;
+
         if (newOrNot.TableEntryReference == "Continue")
             GameManager.isLoading = true;
         else
             GameManager.isLoading = false;
+
         SceneManager.LoadScene(1);
     }
 

@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using System.Linq;
 
 public class InteractItem : MonoBehaviour, IInteractable
 {
@@ -23,7 +20,11 @@ public class InteractItem : MonoBehaviour, IInteractable
             return;
         }
         PV = GetComponent<PhotonView>();
-     
+    }
+
+    private void Update()
+    {
+        transform.Rotate(0, 2, 0);
     }
 
     public void Active()

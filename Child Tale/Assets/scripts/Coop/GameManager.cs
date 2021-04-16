@@ -36,9 +36,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
     #endregion
 
-
-    // Start Method
-
     private void Start()
     {
         isPaused = false;
@@ -55,6 +52,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             return;
         }
 
+        // Создание игроков в мультиплеере
         if (PlayerManager.LocalPlayerInstance == null)
         {
             singlePlayer.SetActive(false);
@@ -65,7 +63,6 @@ public class GameManager : MonoBehaviourPunCallbacks
                 player1 = PhotonNetwork.Instantiate("player",
                     player1SpawnPosition.transform.position,
                     player1SpawnPosition.transform.rotation, 0);
-                //player1.gameObject.name = player1.GetComponent<PhotonView>().Owner.NickName;
 
                 player1.GetComponentInChildren<RayCastPlayer>().gameManager = this;
 
@@ -76,7 +73,6 @@ public class GameManager : MonoBehaviourPunCallbacks
                 player2 = PhotonNetwork.Instantiate("player",
                     player2SpawnPosition.transform.position,
                     player2SpawnPosition.transform.rotation, 0);
-                //player2.gameObject.name = player1.GetComponent<PhotonView>().Owner.NickName;
 
                 player2.GetComponentInChildren<RayCastPlayer>().gameManager = this;
 
@@ -94,30 +90,40 @@ public class GameManager : MonoBehaviourPunCallbacks
             if (!pause.activeSelf)
             {
                 if (!TextFile.isFileOpen)
-                {
-                    Cursor.lockState = CursorLockMode.None;
-                    Cursor.visible = true;
-                }
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+                    CursorView(true);
+
                 if (video.isPaused)
                     video.Play();
+
+                CursorView(false);
+
                 AudioListener.pause = false;
                 Time.timeScale = 1f;
                 isPaused = false;
             }
             else
             {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
+                CursorView(true);
+
                 if (video.isPlaying)
                     video.Pause();
+
                 AudioListener.pause = true;
                 isPaused = true;
+
                 if (PhotonNetwork.OfflineMode)
                     Time.timeScale = 0f;
             }
         }
+    }
+
+    public void CursorView(bool view)
+    {
+        Cursor.visible = view;
+        if (view)
+            Cursor.lockState = CursorLockMode.None;
+        else
+            Cursor.lockState = CursorLockMode.Locked;
     }
 
 
@@ -143,11 +149,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         Debug.Log("onplayerleftroom");
+
         if (otherPlayer.IsMasterClient)
-        {
-            // PhotonNetwork.LoadLevel(0);
             SceneManager.LoadScene(0);
-        }
     }
 
 

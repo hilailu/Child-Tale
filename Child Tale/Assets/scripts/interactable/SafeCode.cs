@@ -1,7 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using Photon.Pun;
 using UnityEngine.Localization;
@@ -15,22 +13,24 @@ public class SafeCode : MonoBehaviour, ISafeInteractive, ISaveable
     private PhotonView PV;
     private Camera cameraFromPlayer;
 
-    private string answer = "12345";
+    public string answer = "12345";
     [HideInInspector] public int maxNumbers = 7;
 
     private Vector3 startPointCameraPos;
     private Quaternion startPointCameraQuat;
 
-    public static bool isActive = false;
     [HideInInspector] public bool isOpened = false;
+    public static bool isActive = false;
     private bool isSomebodyUse = false;
 
     private LocalizedString safe = new LocalizedString { TableReference = "safe" };
+
 
     void UpdateString(string translatedValue)
     {
         inputField.text = translatedValue;
     }
+
 
     private void Start()
     {
@@ -38,9 +38,11 @@ public class SafeCode : MonoBehaviour, ISafeInteractive, ISaveable
         safe.StringChanged += UpdateString;
     }
 
+
     public void checkAnswer()
     {
         if (isOpened) return;
+
         if (inputField.text == answer)
         {
             isOpened = true;
@@ -54,8 +56,10 @@ public class SafeCode : MonoBehaviour, ISafeInteractive, ISaveable
         }
     }
 
+
     public void ClearInput()
         => inputField.text = string.Empty;
+
 
     public void Active(Camera camera)
     {
@@ -64,17 +68,16 @@ public class SafeCode : MonoBehaviour, ISafeInteractive, ISaveable
         if (!PhotonNetwork.OfflineMode)
             PV.RPC("SetUseable", RpcTarget.Others, true);
 
-
         startPointCameraPos = camera.transform.position;
         startPointCameraQuat = camera.transform.rotation;
 
         isActive = true;
-        Cursor.visible = true;
         GameManager.isPaused = true;
-        Cursor.lockState = CursorLockMode.None;
+        GameManager.instance.CursorView(true);
 
         cameraFromPlayer = camera;
     }
+
 
     private void Update()
     {
@@ -86,7 +89,7 @@ public class SafeCode : MonoBehaviour, ISafeInteractive, ISaveable
 
         if (isActive && Input.GetKeyDown(KeyCode.Escape))
         {
-            StartCoroutine(aaa());
+            StartCoroutine(ForPressEscRoutine());
             GameManager.isPaused = false;
 
             cameraFromPlayer.transform.position = startPointCameraPos;
@@ -94,21 +97,21 @@ public class SafeCode : MonoBehaviour, ISafeInteractive, ISaveable
         }
     }
 
-    IEnumerator aaa()
+
+    IEnumerator ForPressEscRoutine()
     {
         yield return new WaitForSeconds(0.01f);
         isActive = false;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        GameManager.instance.CursorView(false);
 
         if (!PhotonNetwork.OfflineMode)
             PV.RPC("SetUseable", RpcTarget.Others, false);
     }
 
+
     [PunRPC]
     void SetUseable(bool bol)
         => isSomebodyUse = bol;
-
 
 
     public void Save()
