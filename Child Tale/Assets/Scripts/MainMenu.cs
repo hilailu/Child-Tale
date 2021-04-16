@@ -34,11 +34,6 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         CheckSave();
- 
-        Debug.Log("Selected locale " + LocalizationSettings.SelectedLocale);
-        Debug.Log("Prefs locale " + PlayerPrefs.GetString("selected-locale"));
-        //Debug.Log("Selected locale " + LocalizationSettings.SelectedLocale);
-        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.GetLocale(PlayerPrefs.GetString("selected-locale"));
         slider.value = PlayerPrefs.GetFloat("vol");
     }
 
@@ -77,10 +72,6 @@ public class MainMenu : MonoBehaviour
         if (LocalizationSettings.SelectedLocale == LocalizationSettings.AvailableLocales.Locales[0])
             LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[1];
         else LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[0];
-
-        PlayerPrefs.SetString("selected-locale", LocalizationSettings.SelectedLocale.Identifier.Code);
-        Debug.Log("Selected locale is " + PlayerPrefs.GetString("selected-locale"));
-
     }
 
     public void Exit()
