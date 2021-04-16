@@ -7,7 +7,7 @@ using UnityEngine.Localization;
 public class SafeCode : MonoBehaviour, IPlayerInteractive, ISaveable
 {
     public TMP_Text inputField;
-    [SerializeField] Animator animator;
+    static Animator animator;
     [SerializeField] AudioSource audioSource;
     [SerializeField] Transform pointForCamera;
     private PhotonView PV;
@@ -31,13 +31,15 @@ public class SafeCode : MonoBehaviour, IPlayerInteractive, ISaveable
         inputField.text = translatedValue;
     }
 
-
-    private void Start()
+    void Awake()
     {
-        PV = GetComponent<PhotonView>();
+        SaveSystem.onSave += Save;
+        SaveSystem.onLoad += Load;
         safe.StringChanged += UpdateString;
+        var parent = this.transform.parent;
+        animator = parent.gameObject.GetComponentInChildren<Animator>();
+        PV = GetComponent<PhotonView>();
     }
-
 
     public void checkAnswer()
     {

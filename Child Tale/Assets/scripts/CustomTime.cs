@@ -7,6 +7,18 @@ public class CustomTime : MonoBehaviour, ISaveable
     public static float minutes;
     public static float OneCustomMinute = 1f;
 
+    private void Awake()
+    {
+        SaveSystem.onSave += Save;
+        SaveSystem.onLoad += Load;
+    }
+
+    void OnDestroy()
+    {
+        SaveSystem.onSave -= Save;
+        SaveSystem.onLoad -= Load;
+    }
+
     private void Start()
     {
         if (!GameManager.isLoading)
@@ -38,7 +50,7 @@ public class CustomTime : MonoBehaviour, ISaveable
     }
 
     public void Save()
-    { 
+    {
         PlayerData.instance.hours = hours;
         PlayerData.instance.minutes = minutes;
     }
