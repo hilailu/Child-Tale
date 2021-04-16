@@ -26,10 +26,18 @@ public class PlayerController : MonoBehaviour, ISaveable, IPunObservable
 
     private void Awake()
     {
+        SaveSystem.onSave += Save;
+        SaveSystem.onLoad += Load;
         photonView = GetComponent<PhotonView>();
         cameraMain = GetComponentInChildren<Camera>();
         _characterController = GetComponent<CharacterController>();
         phone = GetComponentInChildren<Phone>();
+    }
+
+    void OnDestroy()
+    {
+        SaveSystem.onSave -= Save;
+        SaveSystem.onLoad -= Load;
     }
 
     void Start()

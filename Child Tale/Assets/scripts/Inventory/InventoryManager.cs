@@ -5,15 +5,7 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour, ISaveable
 {
-    #region Singleton
     public static InventoryManager instance;
-    private void Awake()
-    {
-        if (instance != null)
-            return;
-        instance = this;
-    }
-    #endregion
 
     public List<Item> items = new List<Item>();
     private int storage = 5;
@@ -21,11 +13,22 @@ public class InventoryManager : MonoBehaviour, ISaveable
 
     public Action OnInventoryChanged;
 
-    void Start()
+    private void Awake()
     {
+        if (instance != null)
+            return;
+        instance = this;
+        SaveSystem.onSave += Save;
+        SaveSystem.onLoad += Load;
         instance.OnInventoryChanged += UpdateUI;
         inventoryItems = GetComponentsInChildren<InventoryItem>(true);
         UpdateUI();
+    }
+
+    void OnDestroy()
+    {
+        SaveSystem.onSave -= Save;
+        SaveSystem.onLoad -= Load;
     }
 
     private void UpdateUI()

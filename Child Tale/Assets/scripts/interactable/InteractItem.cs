@@ -3,7 +3,7 @@ using Photon.Pun;
 
 public class InteractItem : MonoBehaviour, IInteractable
 {
-    public string ID { get; private set; }
+    private string ID { get; set; }
     [SerializeField] private Item item;
     private PhotonView PV;
 

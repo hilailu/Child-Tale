@@ -7938,7 +7938,7 @@ GameObject:
   - component: {fileID: 872321560}
   - component: {fileID: 872321559}
   m_Layer: 0
-  m_Name: SaveSystem
+  m_Name: SaveLoadManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7953,7 +7953,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 872321558}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ce238d91801e604f88f2bf0599006a8, type: 3}
+  m_Script: {fileID: 11500000, guid: f9d435c37475cad41b0171d43295aab6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &872321560
@@ -24113,6 +24113,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 872321559}
+    - target: {fileID: 4373584633631686065, guid: f1c969fef55212944ac93b7ce2a923b7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Save
+      objectReference: {fileID: 0}
+    - target: {fileID: 4373584633631686065, guid: f1c969fef55212944ac93b7ce2a923b7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SaveLoadManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1c969fef55212944ac93b7ce2a923b7, type: 3}
 --- !u!1 &4373584633463460902 stripped

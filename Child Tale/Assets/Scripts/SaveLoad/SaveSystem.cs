@@ -1,41 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using System.IO;
-using System.Linq;
 using UnityEngine;
 
-public class SaveSystem : MonoBehaviour
+public static class SaveSystem
 {
-    private List<ISaveable> saves = new List<ISaveable>();
+    public static Action onSave;
+    public static Action onLoad;
 
-    private void Awake()
-    {
-        var ss = FindObjectsOfType<MonoBehaviour>().OfType<ISaveable>();
-        foreach (ISaveable item in ss)
-        {
-            saves.Add(item);
-        }
-        if (GameManager.isLoading == true)
-        {           
-            Load();
-        }
-    }
-
-    public void Load()
+    public static void Load()
     {
         JsonUtility.FromJsonOverwrite(File.ReadAllText(Application.persistentDataPath + "/PlayerData.json"), PlayerData.instance);
-        foreach (var save in saves)
-        {
-            save.Load();
-        }
+        onLoad?.Invoke();
     }
 
-    public void Save()
+    public static void Save()
     {
-        foreach (var save in saves)
-        {
-            save.Save();
-        }
+        PlayerData.instance.isItemActivated.Clear();
+        onSave?.Invoke();
         string player = JsonUtility.ToJson(PlayerData.instance, true);
         File.WriteAllText(Application.persistentDataPath + "/PlayerData.json", player);
     }
