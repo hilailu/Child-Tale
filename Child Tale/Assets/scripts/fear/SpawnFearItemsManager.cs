@@ -1,14 +1,14 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnFearItemsManager : MonoBehaviour
 {
     [SerializeField] GameObject[] items;
     [SerializeField] Transform[] spawnPositions;
-    private Transform lastSpawnPos;
     private GameObject lastSpawnedItem = null;
-
-    private void Start()
-        => lastSpawnPos = transform;
+    private Transform lastSpawnPos = null;
+    public float timeUntilSpawn;
 
     private void Update()
     {
