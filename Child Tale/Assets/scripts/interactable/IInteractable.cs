@@ -3,7 +3,7 @@ public interface IInteractable
     void Active();
 }
 
-public interface ISafeInteractive
+public interface IPlayerInteractive
 {
-    void Active(UnityEngine.Camera camera);
+    void Active(PlayerController player);
 }

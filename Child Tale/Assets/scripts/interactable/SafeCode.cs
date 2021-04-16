@@ -4,7 +4,7 @@ using TMPro;
 using Photon.Pun;
 using UnityEngine.Localization;
 
-public class SafeCode : MonoBehaviour, ISafeInteractive, ISaveable
+public class SafeCode : MonoBehaviour, IPlayerInteractive, ISaveable
 {
     public TMP_Text inputField;
     [SerializeField] Animator animator;
@@ -61,21 +61,20 @@ public class SafeCode : MonoBehaviour, ISafeInteractive, ISaveable
         => inputField.text = string.Empty;
 
 
-    public void Active(Camera camera)
+    public void Active(PlayerController player)
     {
-        if (isSomebodyUse) return;
+        if (isSomebodyUse || isOpened) return;
 
         if (!PhotonNetwork.OfflineMode)
             PV.RPC("SetUseable", RpcTarget.Others, true);
-
-        startPointCameraPos = camera.transform.position;
-        startPointCameraQuat = camera.transform.rotation;
+        
+        cameraFromPlayer = player.cameraMain;
+        startPointCameraPos = cameraFromPlayer.transform.position;
+        startPointCameraQuat = cameraFromPlayer.transform.rotation;
 
         isActive = true;
         GameManager.isPaused = true;
         GameManager.instance.CursorView(true);
-
-        cameraFromPlayer = camera;
     }
 
 

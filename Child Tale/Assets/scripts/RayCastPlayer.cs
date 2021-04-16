@@ -3,11 +3,13 @@ using UnityEngine;
 public class RayCastPlayer : MonoBehaviour
 {
     [HideInInspector] public Camera _camera;
-    public GameManager gameManager;
+    //public GameManager gameManager;
+    private PlayerController player;
 
     private void Start()
     {
-        _camera = GetComponentInChildren<Camera>();         ////
+        _camera = GetComponentInChildren<Camera>();
+        player = GetComponentInParent<PlayerController>();
     }
 
     void Update()
@@ -21,7 +23,7 @@ public class RayCastPlayer : MonoBehaviour
 
             if (active != null)
             {
-                gameManager.SetInteractableAnim(true);
+                GameManager.instance.SetInteractableAnim(true);
 
                 if (Input.GetKeyDown(KeyCode.E))
                     active.Active();
@@ -30,19 +32,19 @@ public class RayCastPlayer : MonoBehaviour
             }
 
 
-            var activeForSafe = hit.transform.gameObject.GetComponent<ISafeInteractive>();
+            var activeForSafe = hit.transform.gameObject.GetComponent<IPlayerInteractive>();
 
             if (activeForSafe != null)
             {
-                gameManager.SetInteractableAnim(true);
+                GameManager.instance.SetInteractableAnim(true);
 
                 if (Input.GetKeyDown(KeyCode.E))
-                    activeForSafe.Active(_camera);
+                    activeForSafe.Active(player);
             }
         }
         else
         {
-            gameManager.SetInteractableAnim(false);
+            GameManager.instance.SetInteractableAnim(false);
         }
     }
 }

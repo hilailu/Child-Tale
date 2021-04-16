@@ -97,7 +97,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 0}
-  gameManager: {fileID: 0}
 --- !u!1 &4437357654503026271
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,7 +252,6 @@ MonoBehaviour:
   gravity: -9.8
   jumpForce: 3.5
   photonView: {fileID: 0}
-  nickName: 
 --- !u!143 &4437357655123530169
 CharacterController:
   m_ObjectHideFlags: 0
