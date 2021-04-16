@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private AudioMixer mixer;
     [SerializeField] Launcher launcher;
     [SerializeField] private TMP_Text newOrContinue;
+    [SerializeField] private Slider slider;
     private LocalizedString newOrNot = new LocalizedString { TableReference = "UI Text", TableEntryReference = "New"};
 
     void UpdateString(string translatedValue)
@@ -26,12 +27,19 @@ public class MainMenu : MonoBehaviour
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        AudioListener.pause = false;
         newOrNot.StringChanged += UpdateString;
     }
 
     private void Start()
     {
         CheckSave();
+ 
+        Debug.Log("Selected locale " + LocalizationSettings.SelectedLocale);
+        Debug.Log("Prefs locale " + PlayerPrefs.GetString("selected-locale"));
+        //Debug.Log("Selected locale " + LocalizationSettings.SelectedLocale);
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.GetLocale(PlayerPrefs.GetString("selected-locale"));
+        slider.value = PlayerPrefs.GetFloat("vol");
     }
 
     public void CheckSave()
@@ -44,31 +52,35 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene(1);
         Photon.Pun.PhotonNetwork.OfflineMode = true;
         if (newOrNot.TableEntryReference == "Continue")
             GameManager.isLoading = true;
         else
             GameManager.isLoading = false;
+        SceneManager.LoadScene(1);
     }
 
     public void DeleteProgress()
     {
         File.Delete(Application.persistentDataPath + "/PlayerData.json");
-        //InteractItemSet.CollectedItems.Clear();
         newOrNot.TableEntryReference = "New";
     }
 
     public void Volume(float vol)
     {
         mixer.SetFloat("volume", vol);
+        PlayerPrefs.SetFloat("vol", vol);
     }
 
     public void Language()
-    {
+    { 
         if (LocalizationSettings.SelectedLocale == LocalizationSettings.AvailableLocales.Locales[0])
             LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[1];
         else LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[0];
+
+        PlayerPrefs.SetString("selected-locale", LocalizationSettings.SelectedLocale.Identifier.Code);
+        Debug.Log("Selected locale is " + PlayerPrefs.GetString("selected-locale"));
+
     }
 
     public void Exit()

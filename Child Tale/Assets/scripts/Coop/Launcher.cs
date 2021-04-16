@@ -25,7 +25,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
 
         buttonLoadArena.SetActive(false);
     }

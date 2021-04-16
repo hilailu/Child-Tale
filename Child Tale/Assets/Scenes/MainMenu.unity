@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.49641466, b: 0.5748159, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465788, g: 0.49641412, b: 0.57481503, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2319,12 +2319,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
-  nickName: 
   pos: {x: 0, y: 0, z: 0}
   rot: {x: 0, y: 0, z: 0, w: 0}
   isSafeOpened: 0
   minutes: 0
   hours: 0
+  CollectedItems: []
 --- !u!4 &549133143
 Transform:
   m_ObjectHideFlags: 0
@@ -4240,9 +4240,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mixer: {fileID: 24100000, guid: 7496f211798c13e42af264f3727b83d3, type: 2}
   launcher: {fileID: 53668782}
-  newGame: {fileID: 600609162}
-  continueGame: {fileID: 0}
   newOrContinue: {fileID: 2101149951}
+  slider: {fileID: 354675209}
 --- !u!82 &1176228183
 AudioSource:
   m_ObjectHideFlags: 0

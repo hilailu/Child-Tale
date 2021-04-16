@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 public class SaveSystem : MonoBehaviour
 {
     private List<ISaveable> saves = new List<ISaveable>();
-    [SerializeField] private List<GameObject> savesGO;
 
     private void Awake()
     {
-        foreach (var item in savesGO)
+        var ss = FindObjectsOfType<MonoBehaviour>().OfType<ISaveable>();
+        foreach (ISaveable item in ss)
         {
-            saves.Add(item.GetComponent<ISaveable>());
+            saves.Add(item);
         }
         if (GameManager.isLoading == true)
         {           
