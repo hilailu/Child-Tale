@@ -92,9 +92,6 @@ public class GameManager : MonoBehaviourPunCallbacks
                 if (!TextFile.isFileOpen)
                     CursorView(true);
 
-                if (video.isPaused)
-                    video.Play();
-
                 CursorView(false);
 
                 AudioListener.pause = false;
@@ -104,9 +101,6 @@ public class GameManager : MonoBehaviourPunCallbacks
             else
             {
                 CursorView(true);
-
-                if (video.isPlaying)
-                    video.Pause();
 
                 AudioListener.pause = true;
                 isPaused = true;

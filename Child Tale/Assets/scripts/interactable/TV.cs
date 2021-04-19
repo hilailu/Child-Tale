@@ -42,4 +42,21 @@ public class TV : MonoBehaviour, IInteractable
             speaker.Stop();
         }
     }
+
+    private void Update()
+    {
+        if (GameManager.isPaused)
+        {
+            video.Pause();
+            speaker.Pause();
+        }
+        else
+        {
+            if (img.IsActive())
+            {
+                video.Play();
+                speaker.Play();
+            }
+        }
+    }
 }

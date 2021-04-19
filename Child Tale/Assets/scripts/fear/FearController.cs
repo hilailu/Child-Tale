@@ -18,12 +18,13 @@ public class FearController : MonoBehaviour
             return;
         instance = this;
     }
+    private FearController() { }
     #endregion
 
     private void Start()
     {
         StartCoroutine(PlusFearRoutine());
-        slider.value = 0;
+        slider.value = fear;
     }
 
     private void Update()
@@ -43,17 +44,17 @@ public class FearController : MonoBehaviour
     public void addFear(int amount)
     {
         fear += amount;
+        UpdateValue();
+    }
+
+    private void UpdateValue()
+    {
         if (fear < 0) fear = 0;
         if (fear > 99)
         {
             fear = 100;
             LoseGame();
         }
-        UpdateValue();
-    }
-
-    private void UpdateValue()
-    {
         slider.value = fear;
         image.color = gradient.Evaluate(slider.normalizedValue);
     }

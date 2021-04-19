@@ -37,6 +37,7 @@ public class CustomTime : MonoBehaviour, ISaveable
     private IEnumerator TimeRoutine()
     {
         minutes++;
+
         if (minutes > 59)
         {
             hours++;
@@ -48,6 +49,9 @@ public class CustomTime : MonoBehaviour, ISaveable
         yield return new WaitForSeconds(OneCustomMinute);
         StartCoroutine(TimeRoutine());
     }
+
+    public static string ToStringTime()
+        => $"{hours:00}:{minutes:00}";
 
     public void Save()
     {

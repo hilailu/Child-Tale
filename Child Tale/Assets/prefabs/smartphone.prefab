@@ -1275,8 +1275,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5082ca03e8ce204981849f9aa8c8cf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   phoneUI: {fileID: 3778585476462762676}
   time: {fileID: 6400120800771895126}
+  phone: 0
+  PV: {fileID: 0}
 --- !u!1 &2900817398898583229
 GameObject:
   m_ObjectHideFlags: 0
