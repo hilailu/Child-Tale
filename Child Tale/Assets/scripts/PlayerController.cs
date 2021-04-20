@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour, ISaveable, IPunObservable
     private Vector3 velocity;
 
     private bool isGrounded;
+    public bool isHungry;
     private bool isRed;
 
     public float sensetiveMouse = 9f;
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour, ISaveable, IPunObservable
         cameraMain = GetComponentInChildren<Camera>();
         _characterController = GetComponent<CharacterController>();
         phone = GetComponentInChildren<Phone>();
+        isHungry = true;
     }
 
     void OnDestroy()
