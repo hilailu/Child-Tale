@@ -25,12 +25,8 @@ public class FearController : MonoBehaviour
     {
         StartCoroutine(PlusFearRoutine());
         slider.value = fear;
-    }
 
-    private void Update()
-    {
-        if (CustomTime.hours == 17)
-            LoseGame();
+        GameManager.instance.OnEndGame += HideBare;
     }
 
     private IEnumerator PlusFearRoutine()
@@ -53,14 +49,18 @@ public class FearController : MonoBehaviour
         if (fear > 99)
         {
             fear = 100;
-            LoseGame();
+            EndGame();
         }
         slider.value = fear;
         image.color = gradient.Evaluate(slider.normalizedValue);
     }
 
-    void LoseGame() 
+    void EndGame() 
     {
         print("Lose Game");
     }
+
+    private void HideBare()
+        => slider.gameObject.SetActive(false);
+        
 }

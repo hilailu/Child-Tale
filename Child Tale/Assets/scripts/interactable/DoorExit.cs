@@ -25,7 +25,7 @@ public class DoorExit : MonoBehaviour, IInteractable
             if (PhotonNetwork.OfflineMode)
             {
                 GameOver();
-                EndGameAnim();
+                //EndGameAnim();
             }
             else
             {
@@ -53,11 +53,11 @@ public class DoorExit : MonoBehaviour, IInteractable
     void GameOver()
     {
         animator.SetTrigger("Game Over");
-        GameManager.isPaused = true;
         audioSource.PlayOneShot(openDoorSounde);
+        GameManager.instance.OnEndGame?.Invoke();
     }
 
-    [PunRPC]
-    void EndGameAnim()
-        => GameManager.instance.EndGame();
+    //[PunRPC]
+    //void EndGameAnim()
+    //    => GameManager.instance.EndGame();
 }

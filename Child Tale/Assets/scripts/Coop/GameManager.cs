@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     [SerializeField] Animator endGameAnimator;
     [SerializeField] GameObject endGameCanvas;
+    public System.Action OnEndGame;
 
     #region Singleton
     public static GameManager instance;
@@ -33,6 +34,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (instance != null)
             return;
         instance = this;
+
+        OnEndGame += EndGame;
     }
     #endregion
 
