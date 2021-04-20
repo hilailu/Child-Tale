@@ -18,10 +18,11 @@ public class PlayerData : MonoBehaviour, ISerializationCallbackReceiver
     public List<Item> items = new List<Item>();
     public Vector3 pos;
     public Quaternion rot;
-    public bool isSafeOpened;
     public float minutes;
     public float hours;
     public string[] CollectedItems;
+    public int fear;
+    public int messages;
 
     public List<string> _keys = new List<string>();
     public List<bool> _values = new List<bool>();

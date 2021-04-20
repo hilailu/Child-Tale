@@ -25,6 +25,7 @@ public class SafeCode : MonoBehaviour, IPlayerInteractive, ISaveable
 
     private LocalizedString safe = new LocalizedString { TableReference = "safe" };
 
+    private string ID { get; set; }
 
     void UpdateString(string translatedValue)
     {
@@ -39,6 +40,14 @@ public class SafeCode : MonoBehaviour, IPlayerInteractive, ISaveable
         var parent = this.transform.parent;
         animator = parent.gameObject.GetComponentInChildren<Animator>();
         PV = GetComponent<PhotonView>();
+        ID = transform.position.sqrMagnitude + "-" + name + "-" + transform.GetSiblingIndex();
+    }
+
+    void OnDestroy()
+    {
+        SaveSystem.onSave -= Save;
+        SaveSystem.onLoad -= Load;
+        safe.StringChanged -= UpdateString;
     }
 
     public void checkAnswer()
@@ -120,17 +129,12 @@ public class SafeCode : MonoBehaviour, IPlayerInteractive, ISaveable
 
     public void Save()
     {
-        PlayerData.instance.isSafeOpened = isOpened;
+        PlayerData.instance.isItemActivated.Add(ID, isOpened);
     }
 
     public void Load()
     {
-        if (PlayerData.instance.isSafeOpened)
-        {
-            isOpened = true;
-            animator.Play("openedsafe");
-        }
-        else
-            animator.Play("New State");
+        isOpened = PlayerData.instance.isItemActivated[ID];
+        animator.SetBool("Open", isOpened);
     }
 }

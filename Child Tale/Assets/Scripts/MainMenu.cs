@@ -31,6 +31,11 @@ public class MainMenu : MonoBehaviour
         newOrNot.StringChanged += UpdateString;
     }
 
+    private void OnDestroy()
+    {
+        newOrNot.StringChanged -= UpdateString;
+    }
+
     private void Start()
     {
         CheckSave();

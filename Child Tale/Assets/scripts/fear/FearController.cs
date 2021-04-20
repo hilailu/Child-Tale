@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FearController : MonoBehaviour
+public class FearController : MonoBehaviour, ISaveable
 {
     [SerializeField] Slider slider;
     [SerializeField] Gradient gradient;
@@ -14,12 +14,20 @@ public class FearController : MonoBehaviour
     public static FearController instance;
     private void Awake()
     {
+        SaveSystem.onSave += Save;
+        SaveSystem.onLoad += Load;
         if (instance != null)
             return;
         instance = this;
     }
     private FearController() { }
     #endregion
+
+    void OnDestroy()
+    {
+        SaveSystem.onSave -= Save;
+        SaveSystem.onLoad -= Load;
+    }
 
     private void Start()
     {
@@ -62,5 +70,15 @@ public class FearController : MonoBehaviour
 
     private void HideBare()
         => slider.gameObject.SetActive(false);
-        
+
+    public void Save()
+    {
+        PlayerData.instance.fear = this.fear;
+    }
+
+    public void Load()
+    {
+        this.fear = PlayerData.instance.fear;
+        UpdateValue();
+    }
 }
