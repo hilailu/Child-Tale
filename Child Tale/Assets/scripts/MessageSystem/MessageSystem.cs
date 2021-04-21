@@ -50,9 +50,27 @@ public class MessageSystem : MonoBehaviour, ISaveable
 
     private void Update()
     {
-        if (CustomTime.ToStringTime() == "09:05" && indexOfMessage == 0)
+        string time = CustomTime.ToStringTime();
+
+        if (time == "09:05" && indexOfMessage == 0)           // мама
             NewMessage();
-        else if (CustomTime.ToStringTime() == "09:30" && indexOfMessage == 1)
+
+        else if (time == "09:30" && indexOfMessage == 1)      // друг
+            NewMessage();
+
+        else if (time == "10:10" && indexOfMessage == 2)      // костян_1 (буллер)
+            NewMessage();
+
+        else if (time == "11:40" && indexOfMessage == 3)      // костян_2
+            NewMessage();
+
+        else if (time == "13:00" && indexOfMessage == 4)      // костян_3
+            NewMessage();
+
+        else if (time == "14:30" && indexOfMessage == 5)      // костян_4
+            NewMessage();
+
+        else if (time == "16:00" && indexOfMessage == 6)      // костян_5
             NewMessage();
     }
 

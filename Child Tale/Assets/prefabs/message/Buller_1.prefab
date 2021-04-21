@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 8803152610294864915}
   - component: {fileID: 6265445855306181380}
   - component: {fileID: -697463576353365225}
+  - component: {fileID: -5639618874654167991}
   m_Layer: 0
-  m_Name: Buller_1
+  m_Name: buller_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,7 +135,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cffc16774f1d8e1408462e21521492e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMessage: "\u0442\u0435\u0431\u0435 \u043F\u0438\u0437\u0434\u0430 \u043A\u0435\u043A\u0432"
+  message: "\u0431\u0443\u043B\u0435\u0440"
+--- !u!114 &-5639618874654167991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731132568342265415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:745641c52e833f546bf14db23dba2720
+    m_TableEntryReference:
+      m_KeyId: 4301890846720
+      m_Key: 
+    m_FallbackState: 0
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -697463576353365225}
+        m_TargetAssemblyTypeName: Message, Assembly-CSharp
+        m_MethodName: set_textMessage
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3898853978394325253
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,7 +236,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: text.txt
+  m_text: SMS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

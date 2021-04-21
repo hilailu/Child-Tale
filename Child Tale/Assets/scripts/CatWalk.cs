@@ -6,6 +6,8 @@ public class CatWalk : MonoBehaviour, IInteractable
 {
     [SerializeField] Animator animator;
     private AudioSource meowAudio;
+    [SerializeField] private GameObject paperCode;
+    [SerializeField] Item catFood;
     private PhotonView PV;
 
     private float speed = 3f;
@@ -37,9 +39,31 @@ public class CatWalk : MonoBehaviour, IInteractable
 
     private IEnumerator CDMeowRoutine()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
+
+        if (InventoryManager.instance.items.Contains(catFood))
+        {
+            Vector3 spawnPos = transform.localPosition + transform.forward + transform.up;
+            GameObject paper = Instantiate(paperCode, spawnPos, Quaternion.identity);
+
+            StartCoroutine(IncreaseSizeRoutine(paper));
+            InventoryManager.instance.Remove(catFood);
+        }
+
+        yield return new WaitForSeconds(1.5f);
         isMeow = false;
         animator.SetBool("Is Meow", isMeow);
+    }
+
+    // Постепенное увеличение в размерах)))
+    private IEnumerator IncreaseSizeRoutine(GameObject obj)
+    {
+        Vector3 scaleFactor = obj.transform.localScale /= 20;
+        for (int i = 0; i < 20; i++)
+        {
+            obj.transform.localScale += scaleFactor;
+            yield return new WaitForSeconds(0.05f);
+        }
     }
 
 

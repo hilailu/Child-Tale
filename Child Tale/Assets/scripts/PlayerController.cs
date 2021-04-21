@@ -1,7 +1,7 @@
 using Photon.Pun;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, ISaveable, IPunObservable
+public class PlayerController : MonoBehaviour, ISaveable
 {
     public Camera cameraMain;
     private CharacterController _characterController;
@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour, ISaveable, IPunObservable
 
     private bool isGrounded;
     public bool isHungry;
-    private bool isRed;
 
     public float sensetiveMouse = 9f;
     public float speed = 6f;
@@ -94,18 +93,13 @@ public class PlayerController : MonoBehaviour, ISaveable, IPunObservable
 
             velocity.y += gravity * Time.deltaTime;
             _characterController.Move(velocity * Time.deltaTime);
-
-
-
-            // Test
-            if (Input.GetKey(KeyCode.Z))
-            {
-                isRed = true;
-            }
-            else isRed = false;
         }
-        if (isRed) GetComponent<MeshRenderer>().material.color = Color.red;
-        else GetComponent<MeshRenderer>().material.color = Color.white;
+    }
+
+
+    private void Death()
+    {
+
     }
 
     public void Save()
@@ -118,17 +112,5 @@ public class PlayerController : MonoBehaviour, ISaveable, IPunObservable
     {
         this.transform.position = PlayerData.instance.pos;
         this.transform.rotation = PlayerData.instance.rot;
-    }
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(isRed);
-        }
-        else if (stream.IsReading)
-        {
-            isRed = (bool)stream.ReceiveNext();
-        }
     }
 }

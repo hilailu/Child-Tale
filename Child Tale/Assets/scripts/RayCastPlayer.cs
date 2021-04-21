@@ -3,7 +3,6 @@ using UnityEngine;
 public class RayCastPlayer : MonoBehaviour
 {
     [HideInInspector] public Camera _camera;
-    //public GameManager gameManager;
     private PlayerController player;
 
     private void Start()
@@ -17,7 +16,7 @@ public class RayCastPlayer : MonoBehaviour
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 2f))
+        if (Physics.Raycast(ray, out hit, 2f) && !GameManager.isPaused)
         {
             var active = hit.transform.gameObject.GetComponent<IInteractable>();
 

@@ -105,9 +105,6 @@ public class SafeCode : MonoBehaviour, IPlayerInteractive, ISaveable
             cameraFromPlayer.transform.position = startPointCameraPos;
             cameraFromPlayer.transform.rotation = startPointCameraQuat;
         }
-
-        if(isActive)
-            GameManager.instance.SetInteractableAnim(false);
     }
 
 

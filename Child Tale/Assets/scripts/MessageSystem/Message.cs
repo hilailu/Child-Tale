@@ -4,7 +4,8 @@ using TMPro;
 
 public class Message : MonoBehaviour, IPointerClickHandler
 {
-    public string textMessage;
+    [SerializeField] string message;
+    public string textMessage { get => message; set => message = value; }
 
     public void OnPointerClick(PointerEventData eventData)
     {

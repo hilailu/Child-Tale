@@ -87,6 +87,14 @@ MonoBehaviour:
     m_Key: load level
     m_Metadata:
       m_Items: []
+  - m_Id: 6532031625101312
+    m_Key: new message
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6543683833626624
+    m_Key: results of game
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

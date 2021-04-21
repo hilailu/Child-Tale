@@ -8,7 +8,7 @@ public class InventoryManager : MonoBehaviour, ISaveable
     public static InventoryManager instance;
 
     public List<Item> items = new List<Item>();
-    private int storage = 5;
+    private int storage = 6;
     public InventoryItem[] inventoryItems;
 
     public Action OnInventoryChanged;

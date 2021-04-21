@@ -67,8 +67,6 @@ public class GameManager : MonoBehaviourPunCallbacks
                     player1SpawnPosition.transform.position,
                     player1SpawnPosition.transform.rotation, 0);
 
-                //player1.GetComponentInChildren<RayCastPlayer>().gameManager = this;
-
             }
             else
             {
@@ -76,9 +74,6 @@ public class GameManager : MonoBehaviourPunCallbacks
                 player2 = PhotonNetwork.Instantiate("player",
                     player2SpawnPosition.transform.position,
                     player2SpawnPosition.transform.rotation, 0);
-
-                //player2.GetComponentInChildren<RayCastPlayer>().gameManager = this;
-
             }
         }
     }

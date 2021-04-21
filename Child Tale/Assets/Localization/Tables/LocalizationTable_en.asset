@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: 18a2a0c807cadbe4eac04da1826f86c2, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - id: 0
   m_TableData:
   - m_Id: 506181099520
     m_Localized: New Game
@@ -90,5 +91,18 @@ MonoBehaviour:
     m_Localized: load level
     m_Metadata:
       m_Items: []
+  - m_Id: 6532031625101312
+    m_Localized: new message
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6543683833626624
+    m_Localized: 
+    m_Metadata:
+      m_Items:
+      - id: 0
   references:
     version: 1
+    00000000:
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00006d1e723f1700

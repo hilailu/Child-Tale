@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: messages_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 745641c52e833f546bf14db23dba2720, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 18206228480
+    m_Localized: Sorry son, I had urgently to leave. I know what today is your important
+      football match (but you just a reserve player), i forgot put your sports uniform,
+      look for her yourself, necessarily feed cat and feed yourself, food in microwave,
+      key of door as always in safe, love you, Mom))
+    m_Metadata:
+      m_Items: []
+  - m_Id: 101949702144
+    m_Localized: "It's Jenya, in general Vlad leave to village, well you will play
+      instead him, though you bad player, but believe in you, because this is the
+      final of the championship on yard football\r, in general don't pump up, match
+      in 17:00.\n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4301890846720
+    m_Localized: Hi jerk, it's Kostya, I hear you will play instead Vlad, it's just
+      a joke, because you never touched a ball AHAHAHHA, well you exactly let down
+      your team and all will laught from you, good luck jerk)(
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6058838654976
+    m_Localized: Are you really going to come here ? AHAHHA, omg, stop kidding to
+      me)))
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6293421883392
+    m_Localized: My parents will come to match to see how you bad, it's will be really
+      show.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6656208207872
+    m_Localized: I'm already starting to prepare my funny muscles, we tired to wait
+      you
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8718526513152
+    m_Localized: I hope you won't be late, hope my parents came for a reason))))
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 1

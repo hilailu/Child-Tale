@@ -24,7 +24,7 @@ public class InteractItem : MonoBehaviour, IInteractable
 
     private void Update()
     {
-        transform.Rotate(0, 2, 0);
+        transform.Rotate(0, 1.5f, 0);
     }
 
     public void Active()

@@ -23,15 +23,9 @@ public class DoorExit : MonoBehaviour, IInteractable
         if (inventory.items.Contains(key))
         {
             if (PhotonNetwork.OfflineMode)
-            {
                 GameOver();
-                //EndGameAnim();
-            }
             else
-            {
                 PV.RPC("GameOver", RpcTarget.All);
-                PV.RPC("EndGameAnim", RpcTarget.All);
-            }
         }
         else
         {
@@ -56,8 +50,4 @@ public class DoorExit : MonoBehaviour, IInteractable
         audioSource.PlayOneShot(openDoorSounde);
         GameManager.instance.OnEndGame?.Invoke();
     }
-
-    //[PunRPC]
-    //void EndGameAnim()
-    //    => GameManager.instance.EndGame();
 }
