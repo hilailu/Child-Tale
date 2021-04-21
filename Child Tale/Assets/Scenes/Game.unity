@@ -11123,6 +11123,11 @@ MonoBehaviour:
   messages:
   - {fileID: 1731132568342265415, guid: fe4386b67dc10c54d95a527f84e64c92, type: 3}
   - {fileID: 1731132568342265415, guid: 470864d2a42348f49b1e77e2f78977d7, type: 3}
+  - {fileID: 1731132568342265415, guid: 1a61a8d537e62c244866afb2c3182383, type: 3}
+  - {fileID: 1731132568342265415, guid: 1dac35121f06b154bb84b76cb89fb6c9, type: 3}
+  - {fileID: 1731132568342265415, guid: c4b4eb20003fa0e4193fcf62a58c8733, type: 3}
+  - {fileID: 1731132568342265415, guid: b0117e4a7e7986f479b713b388a66d8e, type: 3}
+  - {fileID: 1731132568342265415, guid: a4df2826ee7434445950351873abeec6, type: 3}
 --- !u!4 &852018337 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 64b5640fcdd99074dbd30a89c10fe12d, type: 3}
@@ -13284,6 +13289,7 @@ GameObject:
   - component: {fileID: 1041807977}
   - component: {fileID: 1041807979}
   - component: {fileID: 1041807978}
+  - component: {fileID: 1041807980}
   m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -13330,7 +13336,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0441\u0432\u0432\u043C\u0430\u0432\u043C\u043C\u043C\u043C\u043C\u043C\u043C\u043C\u043C\u043C\u043C\u043C\u043C\u043C\u043C\u043C\u043C\u0444\u044B\u0432\u044B\u0444\u0432\u0444\u044B"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -13357,14 +13363,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.7
-  m_fontSizeBase: 0.7
+  m_fontSize: 0.55
+  m_fontSizeBase: 0.55
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 8
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -13407,6 +13413,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1041807976}
   m_CullTransparentMesh: 1
+--- !u!114 &1041807980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041807976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1044651130
 PrefabInstance:
   m_ObjectHideFlags: 0
