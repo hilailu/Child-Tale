@@ -96,12 +96,6 @@ public class PlayerController : MonoBehaviour, ISaveable
         }
     }
 
-
-    private void Death()
-    {
-
-    }
-
     public void Save()
     {
         PlayerData.instance.pos = this.transform.position;

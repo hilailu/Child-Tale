@@ -31,6 +31,11 @@ public class FearController : MonoBehaviour, ISaveable
 
     private void Start()
     {
+        if (Photon.Pun.PhotonNetwork.OfflineMode)
+            slider.transform.gameObject.SetActive(true);
+        else
+            slider.transform.gameObject.SetActive(false);
+
         StartCoroutine(PlusFearRoutine());
         slider.value = fear;
 
@@ -57,15 +62,11 @@ public class FearController : MonoBehaviour, ISaveable
         if (fear > 99)
         {
             fear = 100;
-            EndGame();
+            GameManager.instance.OnLoseGame?.Invoke();
         }
+
         slider.value = fear;
         image.color = gradient.Evaluate(slider.normalizedValue);
-    }
-
-    void EndGame() 
-    {
-        print("Lose Game");
     }
 
     private void HideBare()

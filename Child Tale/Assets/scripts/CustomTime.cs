@@ -32,7 +32,7 @@ public class CustomTime : MonoBehaviour, ISaveable
     private void Update()
     {
         if (hours == 17)
-            GameManager.instance.OnEndGame?.Invoke();
+            GameManager.instance.OnLoseGame?.Invoke();
 
         transform.localRotation = Quaternion.Euler(-(hours * 60 + minutes) * 0.5f - 90, 0, 0);
     }

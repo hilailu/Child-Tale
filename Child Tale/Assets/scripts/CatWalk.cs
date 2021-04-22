@@ -77,7 +77,7 @@ public class CatWalk : MonoBehaviour, IInteractable
             Ray ray = new Ray(transform.position, transform.forward);
             RaycastHit hit;
 
-            if (Physics.SphereCast(ray, 0.5f, out hit, 3f))
+            if (Physics.SphereCast(ray, 1f, out hit, 3f))
             {
                 transform.Rotate(new Vector3(0, Random.Range(-100, 100), 0));
             }

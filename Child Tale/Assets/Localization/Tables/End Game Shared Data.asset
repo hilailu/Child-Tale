@@ -23,6 +23,14 @@ MonoBehaviour:
     m_Key: thanks
     m_Metadata:
       m_Items: []
+  - m_Id: 3181219263873024
+    m_Key: results
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3189035697504256
+    m_Key: Lose
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

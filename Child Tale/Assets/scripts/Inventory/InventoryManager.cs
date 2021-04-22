@@ -62,6 +62,17 @@ public class InventoryManager : MonoBehaviour, ISaveable
         OnInventoryChanged?.Invoke();
     }
 
+    public bool CheckClothes()
+    {
+        int clothes = 0;
+        for (int i = 0; i < items.Count; i++)
+        {
+            if (items[i].itemName == "Clothes")
+                clothes++;
+        }
+        return clothes > 3;
+    }
+
     public void Save()
     {
         PlayerData.instance.items = new List<Item>(this.items);

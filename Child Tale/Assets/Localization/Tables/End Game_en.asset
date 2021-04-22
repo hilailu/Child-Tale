@@ -34,5 +34,15 @@ MonoBehaviour:
       game is awesome thing,  have a nice day and eat a lot of pizza)))'
     m_Metadata:
       m_Items: []
+  - m_Id: 3181219263873024
+    m_Localized: You all the same lose match, but all were surprised how you tried
+      to win and what didn't afraid to came and show yourself and you all go to play
+      again, because joy of new fiend bigger tnen sadness of defeat))
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3189035697504256
+    m_Localized: You lose!
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

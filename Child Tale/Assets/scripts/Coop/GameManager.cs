@@ -19,13 +19,11 @@ public class GameManager : MonoBehaviourPunCallbacks
     [SerializeField] private AudioListener listener;
     [SerializeField] private Animator _interactAnimator;
 
-
     public static bool isPaused;
     public static bool isLoading;
 
-    [SerializeField] Animator endGameAnimator;
-    [SerializeField] GameObject endGameCanvas;
     public System.Action OnEndGame;
+    public System.Action OnLoseGame;
 
     #region Singleton
     public static GameManager instance;
@@ -34,8 +32,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (instance != null)
             return;
         instance = this;
-
-        OnEndGame += EndGame;
     }
     #endregion
 
@@ -82,7 +78,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     private void Update()
     {
         // Пауза
-        if (!SafeCode.isActive && Input.GetKeyDown(KeyCode.Escape))
+        if (!SafeCode.isActive && Input.GetKeyDown(KeyCode.Escape) && !EndGame.isGameEnd)
         {
             pause.SetActive(!pause.activeSelf);
             if (!pause.activeSelf)
@@ -151,20 +147,5 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         SceneManager.LoadScene(0);
         PhotonNetwork.Disconnect();
-    }
-
-
-    public void EndGame()
-    {
-        endGameCanvas.SetActive(true);
-        endGameAnimator.SetBool("End Game", true);
-        isPaused = true;
-        StartCoroutine(LoadMenuRoutine());
-    }
-
-    System.Collections.IEnumerator LoadMenuRoutine()
-    {
-        yield return new WaitForSeconds(20);
-        SceneManager.LoadScene(0);
     }
 }

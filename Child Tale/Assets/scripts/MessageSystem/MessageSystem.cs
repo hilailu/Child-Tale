@@ -50,6 +50,8 @@ public class MessageSystem : MonoBehaviour, ISaveable
 
     private void Update()
     {
+        if (EndGame.isGameEnd) return;
+
         string time = CustomTime.ToStringTime();
 
         if (time == "09:05" && indexOfMessage == 0)           // мама
@@ -86,5 +88,4 @@ public class MessageSystem : MonoBehaviour, ISaveable
         {
             Instantiate(messages[i], parentOfMessage.transform);
         }
-    }
-}
+    }}
