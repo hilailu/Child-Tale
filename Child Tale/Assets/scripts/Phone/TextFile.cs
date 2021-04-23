@@ -29,7 +29,7 @@ public class TextFile : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void Save()
+    public void SaveFile()
     {
         filetext = input.text;
     }

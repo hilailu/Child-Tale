@@ -19,43 +19,42 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 18206228480
-    m_Localized: Sorry son, I had urgently to leave. I know what today is your important
-      football match (but you just a reserve player), i forgot put your sports uniform,
-      look for her yourself, necessarily feed cat and feed yourself, food in microwave,
-      key of door as always in safe, love you, Mom))
+    m_Localized: Sorry son, I urgently had to leave. I know that today is your important
+      football match (but you are just a reserve player), i forgot to put your sportswear,
+      look for it yourself, necessarily feed the cat and eat yourself, food is in
+      the microwave, the door key is as always in the safe, love you, Mom))
     m_Metadata:
       m_Items: []
   - m_Id: 101949702144
-    m_Localized: 'It''s Jenya, Vlad leaved to village, you will play instead him,
-      though you bad player, but we hope on you, because this is the FINAL, match
-      in 17:00
+    m_Localized: 'It''s Jenya, Vlad left to village, so you will play instead of
+      him, though you are a bad player, but we believe in you, because this is the
+      FINAL, the match is at 5 p.m.
 
 '
     m_Metadata:
       m_Items: []
   - m_Id: 4301890846720
-    m_Localized: Hi jerk, it's Kostya, I hear you will play instead Vlad, it's just
-      a joke, because you never touched a ball AHAHAHHA, well you exactly let down
-      your team and all will laught from you, good luck jerk)(
+    m_Localized: Hi jerk, it's Kostya, I heard you will play instead of Vlad, it's
+      just a joke, because you never even touched a ball AHAHAHHA, well you definitely
+      will let your team down and everyone will laught at you, good luck jerk)(
     m_Metadata:
       m_Items: []
   - m_Id: 6058838654976
-    m_Localized: Are you really going to come here ? AHAHHA, omg, stop kidding to
-      me)))
+    m_Localized: Are you really going to come here ? AHAHHA, omg, stop kidding me)))
     m_Metadata:
       m_Items: []
   - m_Id: 6293421883392
-    m_Localized: My parents will come to match to see how you bad, it's will be really
-      show.
+    m_Localized: My parents will come to the match to see how bad you are, it will
+      really be a show.
     m_Metadata:
       m_Items: []
   - m_Id: 6656208207872
-    m_Localized: I'm already starting to prepare my funny muscles, we tired to wait
-      you
+    m_Localized: I'm already starting to prepare my funny muscles, we are tired of
+      waiting for you
     m_Metadata:
       m_Items: []
   - m_Id: 8718526513152
-    m_Localized: I hope you won't be late, hope my parents came for a reason))))
+    m_Localized: I hope you won't be late, hope I invited my parents for a reason))))
     m_Metadata:
       m_Items: []
   references:

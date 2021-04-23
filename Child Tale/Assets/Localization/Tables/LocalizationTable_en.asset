@@ -87,25 +87,25 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4259185729273856
-    m_Localized: load level
+    m_Localized: Load level
     m_Metadata:
       m_Items: []
   - m_Id: 6532031625101312
-    m_Localized: new message
+    m_Localized: New message
     m_Metadata:
       m_Items: []
   - m_Id: 6543683833626624
-    m_Localized: this is bare of fear, it's show how much scaried are you, find and
-      eat sweets for reduce it
+    m_Localized: This is your level of fear. It shows how scared you are at the moment.
+      Find and eat sweets to decrease the fear level.
     m_Metadata:
       m_Items: []
   - m_Id: 7252191726075904
     m_Localized: '"Esc" - menu
 
-      "P" - put up smartphone
+      "P" - get the smartphone out of your pocket
 
-      "U" - unlock
-      smartphone
+      "U"
+      - unlock the smartphone
 
       "E" - use or take interactable items'
     m_Metadata:

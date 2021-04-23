@@ -30,5 +30,17 @@ MonoBehaviour:
     m_Localized: Close
     m_Metadata:
       m_Items: []
+  - m_Id: 6051059264823296
+    m_Localized: My note
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6073441111154688
+    m_Localized: You lost The Game.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6073557536645120
+    m_Localized: (not this one, but you get the point)
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

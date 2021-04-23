@@ -22,6 +22,8 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
+        TextFile.isFileOpen = false;
+        EndGame.isGameEnd = false;
         GameManager.isLoading = false;
         GameManager.isPaused = false;
         Time.timeScale = 1f;
@@ -29,17 +31,13 @@ public class MainMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         AudioListener.pause = false;
         newOrNot.StringChanged += UpdateString;
+        CheckSave();
+        slider.value = PlayerPrefs.GetFloat("vol");
     }
 
     private void OnDestroy()
     {
         newOrNot.StringChanged -= UpdateString;
-    }
-
-    private void Start()
-    {
-        CheckSave();
-        slider.value = PlayerPrefs.GetFloat("vol");
     }
 
     public void CheckSave()

@@ -27,6 +27,18 @@ MonoBehaviour:
     m_Key: Close
     m_Metadata:
       m_Items: []
+  - m_Id: 6051059264823296
+    m_Key: Note
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6073441111154688
+    m_Key: laptoptext
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6073557536645120
+    m_Key: laptopdesc
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

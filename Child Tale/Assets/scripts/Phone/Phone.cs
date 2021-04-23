@@ -14,6 +14,7 @@ public class Phone : MonoBehaviourPunCallbacks, IPunObservable
 
     void Start()
     {
+        phone = false;
         anim = GetComponent<Animator>();
         PV = GetComponentInParent<PhotonView>();
     }

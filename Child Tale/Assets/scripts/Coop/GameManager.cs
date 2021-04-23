@@ -83,10 +83,10 @@ public class GameManager : MonoBehaviourPunCallbacks
             pause.SetActive(!pause.activeSelf);
             if (!pause.activeSelf)
             {
-                if (!TextFile.isFileOpen)
+                if (TextFile.isFileOpen)
                     CursorView(true);
-
-                CursorView(false);
+                else
+                    CursorView(false);
 
                 AudioListener.pause = false;
                 Time.timeScale = 1f;
