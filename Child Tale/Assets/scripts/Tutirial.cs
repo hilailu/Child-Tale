@@ -8,9 +8,10 @@ public class Tutirial : MonoBehaviour
     {
         if (Photon.Pun.PhotonNetwork.OfflineMode)
         {
-            print("tutorial");
             transform.gameObject.SetActive(true);
             GameManager.instance.CursorView(true);
+            GameManager.isPaused = true;
+            Time.timeScale = 0f;
         }
         else
             transform.gameObject.SetActive(false);
@@ -20,5 +21,13 @@ public class Tutirial : MonoBehaviour
     {
         transform.gameObject.SetActive(false);
         GameManager.instance.CursorView(false);
+        GameManager.isPaused = false;
+        Time.timeScale = 1f;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+            transform.gameObject.SetActive(false);
     }
 }

@@ -32,12 +32,16 @@ public class FearController : MonoBehaviour, ISaveable
     private void Start()
     {
         if (Photon.Pun.PhotonNetwork.OfflineMode)
+        {
+            StartCoroutine(PlusFearRoutine());
+            slider.value = fear;
             slider.transform.gameObject.SetActive(true);
+        }
         else
+        {
             slider.transform.gameObject.SetActive(false);
-
-        StartCoroutine(PlusFearRoutine());
-        slider.value = fear;
+            return;
+        }
 
         GameManager.instance.OnEndGame += HideBare;
     }

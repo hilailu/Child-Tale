@@ -43,11 +43,6 @@ public class PlayerController : MonoBehaviour, ISaveable
 
     void Start()
     {
-        // Закрепление курсора в центре экрана и отключение его видимости
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
-
         // Удаление второй камеры и аудиолистенера
         if (!photonView.IsMine)
             Destroy(cameraMain.gameObject);

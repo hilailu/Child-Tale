@@ -50,7 +50,7 @@ public class MessageSystem : MonoBehaviour, ISaveable
 
     private void Update()
     {
-        if (EndGame.isGameEnd) return;
+        if (EndGame.isGameEnd || !Photon.Pun.PhotonNetwork.OfflineMode) return;
 
         string time = CustomTime.ToStringTime();
 

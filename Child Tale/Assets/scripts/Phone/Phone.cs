@@ -8,9 +8,9 @@ public class Phone : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] private GameObject phoneUI;
     [SerializeField] private TMP_Text time;
     private Animator anim;
-    public  bool phone;
+    public bool phone;
 
-    public PhotonView PV;
+    [HideInInspector] public PhotonView PV;
 
     void Start()
     {

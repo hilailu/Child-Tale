@@ -247,6 +247,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 192
+  isHungry: 0
   sensetiveMouse: 9
   speed: 6
   gravity: -9.8
@@ -303,9 +304,8 @@ MonoBehaviour:
   prefixField: -1
   Synchronization: 2
   OwnershipTransfer: 0
-  observableSearch: 2
+  observableSearch: 0
   ObservedComponents:
-  - {fileID: 4437357655123530174}
   - {fileID: 3842903028041320458}
   - {fileID: 4623562031019609083}
   sceneViewId: 1
