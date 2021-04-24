@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Tutirial : MonoBehaviour
 {
+    [SerializeField] AudioSource audioSource;
+
     private void Start()
     {
         if (Photon.Pun.PhotonNetwork.OfflineMode)
@@ -14,20 +16,32 @@ public class Tutirial : MonoBehaviour
             Time.timeScale = 0f;
         }
         else
+        {
             transform.gameObject.SetActive(false);
+            audioSource.Play();
+        }
     }
 
     public void CloseButton()
     {
         transform.gameObject.SetActive(false);
-        GameManager.instance.CursorView(false);
-        GameManager.isPaused = false;
-        Time.timeScale = 1f;
+        CancelTutorial();
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
             transform.gameObject.SetActive(false);
+            CancelTutorial();
+        }
+    }
+
+    void CancelTutorial()
+    {
+        GameManager.instance.CursorView(false);
+        GameManager.isPaused = false;
+        Time.timeScale = 1f;
+        audioSource.Play();
     }
 }

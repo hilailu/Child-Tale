@@ -61,6 +61,7 @@ public class CatWalk : MonoBehaviour, IInteractable
         Vector3 scaleFactor = obj.transform.localScale /= 20;
         for (int i = 0; i < 20; i++)
         {
+            if (obj == null) break;
             obj.transform.localScale += scaleFactor;
             yield return new WaitForSeconds(0.05f);
         }

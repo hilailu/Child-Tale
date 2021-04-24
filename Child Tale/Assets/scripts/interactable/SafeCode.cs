@@ -13,7 +13,7 @@ public class SafeCode : MonoBehaviour, IPlayerInteractive, ISaveable
     private PhotonView PV;
     private Camera cameraFromPlayer;
 
-    public string answer = "41852";
+    private string answer = "41852";
     [HideInInspector] public int maxNumbers = 7;
 
     private Vector3 startPointCameraPos;

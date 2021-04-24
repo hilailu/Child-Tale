@@ -10,9 +10,9 @@ public class buttonSafeNumber : MonoBehaviour
 
     public void ButtonNumberClick()
     {
-        if (safeCode.maxNumbers > safeCode.inputField.text.Length && safeCode.inputField.text != "success")
+        if (safeCode.maxNumbers > safeCode.inputField.text.Length)
         {
-            if (safeCode.inputField.text == "error")
+            if (!string.IsNullOrEmpty(safeCode.inputField.text) && !char.IsDigit(safeCode.inputField.text[0])) 
                 safeCode.ClearInput();
 
             safeCode.inputField.text += textButton.text;
