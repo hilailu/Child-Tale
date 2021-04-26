@@ -1,5 +1,6 @@
 using UnityEngine;
 using Photon.Pun;
+using System.IO;
 
 public class InteractItem : MonoBehaviour, IInteractable
 {
@@ -14,10 +15,13 @@ public class InteractItem : MonoBehaviour, IInteractable
 
     private void Start()
     {
-        if (InteractItemSet.CollectedItems.Contains(ID))
+        if (File.Exists(Application.persistentDataPath + "/PlayerData.json"))
         {
-            Destroy(this.gameObject);
-            return;
+            if (InteractItemSet.CollectedItems.Contains(ID))
+            {
+                Destroy(this.gameObject);
+                return;
+            }
         }
         PV = GetComponent<PhotonView>();
     }

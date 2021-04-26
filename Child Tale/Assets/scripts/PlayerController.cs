@@ -95,11 +95,13 @@ public class PlayerController : MonoBehaviour, ISaveable
     {
         PlayerData.instance.pos = this.transform.position;
         PlayerData.instance.rot = this.transform.rotation;
+        PlayerData.instance.isHungry = this.isHungry;
     }
 
     public void Load()
     {
         this.transform.position = PlayerData.instance.pos;
         this.transform.rotation = PlayerData.instance.rot;
+        this.isHungry = PlayerData.instance.isHungry;
     }
 }

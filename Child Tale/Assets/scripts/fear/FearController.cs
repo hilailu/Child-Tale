@@ -33,6 +33,7 @@ public class FearController : MonoBehaviour, ISaveable
     {
         if (Photon.Pun.PhotonNetwork.OfflineMode)
         {
+            plusFearCD = PlayerPrefs.GetFloat("mode");
             StartCoroutine(PlusFearRoutine());
             slider.value = fear;
             slider.transform.gameObject.SetActive(true);

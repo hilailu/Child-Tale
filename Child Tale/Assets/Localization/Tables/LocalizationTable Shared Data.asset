@@ -99,6 +99,22 @@ MonoBehaviour:
     m_Key: tutorial controls buttons
     m_Metadata:
       m_Items: []
+  - m_Id: 8650029493297152
+    m_Key: choose
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8650105687023616
+    m_Key: easy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8650226042576896
+    m_Key: medium
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8650296309751808
+    m_Key: hard
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class Microwave : MonoBehaviour, IInteractable
+public class Microwave : MonoBehaviour, IInteractable, ISaveable
 {
     private AudioSource audioSource;
     private Animator animator;
@@ -11,13 +11,25 @@ public class Microwave : MonoBehaviour, IInteractable
     [SerializeField] AudioClip openSounde;
     [SerializeField] AudioClip workingSounde;
     private bool isWorking;
+    private float timeLeft;
 
-    private void Start()
+    private string ID { get; set; }
+
+    private void Awake()
     {
+        SaveSystem.onSave += Save;
+        SaveSystem.onLoad += Load;
         audioSource = GetComponentInParent<AudioSource>();
         animator = GetComponentInParent<Animator>();
         PV = GetComponentInParent<PhotonView>();
         isWorking = false;
+        ID = transform.position.sqrMagnitude + "-" + name + "-" + transform.GetSiblingIndex();
+    }
+
+    private void OnDestroy()
+    {
+        SaveSystem.onSave -= Save;
+        SaveSystem.onLoad -= Load;
     }
 
     public void Active()
@@ -32,15 +44,34 @@ public class Microwave : MonoBehaviour, IInteractable
 
     [PunRPC]
     void playAnim()
-        => StartCoroutine(WorkingMicrowaveRoutine());
+        => StartCoroutine(WorkingMicrowaveRoutine(60f));
 
-    IEnumerator WorkingMicrowaveRoutine()
+    IEnumerator WorkingMicrowaveRoutine(float time)
     {
         isWorking = true;
         audioSource.PlayOneShot(workingSounde);
-        yield return new WaitForSeconds(60f);
+        for (float i = 1; i <= time; i++)
+        {
+            yield return new WaitForSeconds(1f);
+            timeLeft = time - i;
+        }
         animator.SetBool("IsOpen", isWorking);
         audioSource.PlayOneShot(openSounde);
-        Destroy(this);
+    }
+
+    public void Save()
+    {
+        PlayerData.instance.microwave = this.timeLeft;
+        PlayerData.instance.isItemActivated.Add(ID, isWorking);
+    }
+
+    public void Load()
+    {
+        this.timeLeft = PlayerData.instance.microwave;
+        isWorking = PlayerData.instance.isItemActivated[ID];
+        if (timeLeft > 0f)
+            StartCoroutine(WorkingMicrowaveRoutine(timeLeft));
+        else
+            animator.SetBool("IsOpen", isWorking);
     }
 }

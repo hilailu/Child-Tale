@@ -18,8 +18,10 @@ public class PlayerData : MonoBehaviour, ISerializationCallbackReceiver
     public List<Item> items = new List<Item>();
     public Vector3 pos;
     public Quaternion rot;
+    public bool isHungry;
     public float minutes;
     public float hours;
+    public float microwave;
     public string[] CollectedItems;
     public int fear;
     public int messages;

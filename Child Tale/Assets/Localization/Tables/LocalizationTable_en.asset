@@ -110,5 +110,21 @@ MonoBehaviour:
       "E" - use or take interactable items'
     m_Metadata:
       m_Items: []
+  - m_Id: 8650029493297152
+    m_Localized: 'Choose game mode:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8650105687023616
+    m_Localized: Easy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8650226042576896
+    m_Localized: Medium
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8650296309751808
+    m_Localized: HARD
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

@@ -13,6 +13,9 @@ public class MainMenu : MonoBehaviour
     [SerializeField] Launcher launcher;
     [SerializeField] private TMP_Text newOrContinue;
     [SerializeField] private Slider slider;
+    [SerializeField] private GameObject modeCanvas;
+    [SerializeField] private GameObject mainCanvas;
+
     private LocalizedString newOrNot = new LocalizedString { TableReference = "UI Text", TableEntryReference = "New"};
 
     void UpdateString(string translatedValue)
@@ -53,11 +56,16 @@ public class MainMenu : MonoBehaviour
         Photon.Pun.PhotonNetwork.OfflineMode = true;
 
         if (newOrNot.TableEntryReference == "Continue")
+        {
             GameManager.isLoading = true;
+            SceneManager.LoadScene(1);
+        }
         else
+        {
             GameManager.isLoading = false;
-
-        SceneManager.LoadScene(1);
+            modeCanvas.SetActive(true);
+            mainCanvas.SetActive(false);
+        }
     }
 
     public void DeleteProgress()

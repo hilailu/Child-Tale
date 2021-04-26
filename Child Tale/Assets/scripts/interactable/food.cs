@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using System.IO;
 
 public class food : MonoBehaviour, IPlayerInteractive
 {
@@ -9,13 +8,14 @@ public class food : MonoBehaviour, IPlayerInteractive
 
     private void Start()
     {
+        if (File.Exists(Application.persistentDataPath + "/PlayerData.json") && !PlayerData.instance.isHungry)
+            Destroy(this.gameObject);
         PV = GetComponent<PhotonView>();
     }
 
     public void Active(PlayerController player)
     {
         player.isHungry = false;
-
         if (PhotonNetwork.OfflineMode)
             Eat();
         else
