@@ -45,6 +45,12 @@ public class Phone : MonoBehaviourPunCallbacks, IPunObservable
             {
                 phoneUI.SetActive(!phoneUI.activeSelf);
             }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                phone = false;
+                phoneUI.SetActive(false);
+            }
         }
 
         // Открытие смартфона
