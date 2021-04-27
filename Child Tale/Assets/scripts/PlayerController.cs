@@ -85,10 +85,9 @@ public class PlayerController : MonoBehaviour, ISaveable
 
             if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
                 velocity.y += Mathf.Sqrt(jumpForce * -2f * gravity);
-
-            velocity.y += gravity * Time.deltaTime;
-            _characterController.Move(velocity * Time.deltaTime);
         }
+        velocity.y += gravity * Time.deltaTime;
+        _characterController.Move(velocity * Time.deltaTime);
     }
 
     public void Save()
