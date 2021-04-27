@@ -20,13 +20,16 @@ public class CatWalk : MonoBehaviour, IInteractable
         StartCoroutine(MeowSomeTimesRoutine());
     }
 
+
     public void Active()
     {
         if (PhotonNetwork.OfflineMode)
             PlayMeowAnim();
         else
             PV.RPC("PlayMeowAnim", RpcTarget.All);
+        FeedCat();
     }
+
 
     [PunRPC]
     void PlayMeowAnim()
@@ -37,23 +40,33 @@ public class CatWalk : MonoBehaviour, IInteractable
         StartCoroutine(CDMeowRoutine());
     }
 
+
     private IEnumerator CDMeowRoutine()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2f);
+        isMeow = false;
+        animator.SetBool("Is Meow", isMeow);
+    }
 
+
+    private void FeedCat()
+    {
+        // Спаун бумажки с кодом, если есть корм в кармане
         if (InventoryManager.instance.items.Contains(catFood))
         {
             Vector3 spawnPos = transform.localPosition + transform.forward + transform.up;
-            GameObject paper = Instantiate(paperCode, spawnPos, Quaternion.identity);
+
+            GameObject paper;
+            if (PhotonNetwork.OfflineMode)
+                paper = Instantiate(paperCode, spawnPos, Quaternion.identity);
+            else
+                paper = PhotonNetwork.Instantiate("Paper", spawnPos, Quaternion.identity, 0);
 
             StartCoroutine(IncreaseSizeRoutine(paper));
             InventoryManager.instance.Remove(catFood);
         }
-
-        yield return new WaitForSeconds(1.5f);
-        isMeow = false;
-        animator.SetBool("Is Meow", isMeow);
     }
+
 
     // Постепенное увеличение в размерах)))
     private IEnumerator IncreaseSizeRoutine(GameObject obj)

@@ -21,7 +21,7 @@ public class Microwave : MonoBehaviour, IInteractable, ISaveable
         SaveSystem.onLoad += Load;
         audioSource = GetComponentInParent<AudioSource>();
         animator = GetComponentInParent<Animator>();
-        PV = GetComponentInParent<PhotonView>();
+        PV = GetComponent<PhotonView>();
         isWorking = false;
         ID = transform.position.sqrMagnitude + "-" + name + "-" + transform.GetSiblingIndex();
     }
@@ -52,7 +52,7 @@ public class Microwave : MonoBehaviour, IInteractable, ISaveable
         audioSource.PlayOneShot(workingSounde);
         for (float i = 1; i <= time; i++)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSecondsRealtime(1f);
             timeLeft = time - i;
         }
         animator.SetBool("IsOpen", isWorking);

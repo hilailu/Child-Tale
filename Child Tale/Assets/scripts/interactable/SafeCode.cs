@@ -56,10 +56,10 @@ public class SafeCode : MonoBehaviour, IPlayerInteractive, ISaveable
 
         if (inputField.text == answer)
         {
-            isOpened = true;
-            animator.SetTrigger("Open");
-            safe.TableEntryReference = "success";
-            audioSource.Play();
+            if (PhotonNetwork.OfflineMode)
+                OpenSafe();
+            else
+                PV.RPC("OpenSafe", RpcTarget.All);
         }
         else
         {
@@ -118,6 +118,15 @@ public class SafeCode : MonoBehaviour, IPlayerInteractive, ISaveable
             PV.RPC("SetUseable", RpcTarget.Others, false);
     }
 
+
+    [PunRPC]
+    void OpenSafe()
+    {
+        isOpened = true;
+        animator.SetTrigger("Open");
+        safe.TableEntryReference = "success";
+        audioSource.Play();
+    }
 
     [PunRPC]
     void SetUseable(bool bol)

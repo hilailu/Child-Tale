@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 57131775836366941}
   - component: {fileID: 786552875086404320}
   m_Layer: 0
-  m_Name: Paper Code
+  m_Name: Paper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

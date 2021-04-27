@@ -51,6 +51,8 @@ public class GameManager : MonoBehaviourPunCallbacks
             return;
         }
 
+        CursorView(false);
+
         // Создание игроков в мультиплеере
         if (PlayerManager.LocalPlayerInstance == null)
         {
@@ -88,19 +90,20 @@ public class GameManager : MonoBehaviourPunCallbacks
                 else
                     CursorView(false);
 
-                AudioListener.pause = false;
                 Time.timeScale = 1f;
                 isPaused = false;
+                AudioListener.pause = false;
             }
             else
             {
                 CursorView(true);
-
-                AudioListener.pause = true;
                 isPaused = true;
 
                 if (PhotonNetwork.OfflineMode)
+                {
+                    AudioListener.pause = true;
                     Time.timeScale = 0f;
+                }
             }
         }
     }
