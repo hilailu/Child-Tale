@@ -145,6 +145,20 @@ MonoBehaviour:
     m_StrikethroughThickness: 2.0571427
     m_TabWidth: 88
   m_GlyphTable:
+  - m_Index: 3
+    m_Metrics:
+      m_Width: 0
+      m_Height: 0
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 0
+      m_HorizontalAdvance: 88.15625
+    m_GlyphRect:
+      m_X: 0
+      m_Y: 0
+      m_Width: 0
+      m_Height: 0
+    m_Scale: 1
+    m_AtlasIndex: 0
   - m_Index: 20
     m_Metrics:
       m_Width: 45.25
@@ -230,6 +244,10 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
   m_CharacterTable:
+  - m_ElementType: 1
+    m_Unicode: 32
+    m_GlyphIndex: 3
+    m_Scale: 1
   - m_ElementType: 1
     m_Unicode: 49
     m_GlyphIndex: 20
@@ -331,7 +349,22 @@ MonoBehaviour:
   m_KerningTable:
     kerningPairs: []
   m_FontFeatureTable:
-    m_GlyphPairAdjustmentRecords: []
+    m_GlyphPairAdjustmentRecords:
+    - m_FirstAdjustmentRecord:
+        m_GlyphIndex: 20
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: -6.390625
+          m_YAdvance: 0
+      m_SecondAdjustmentRecord:
+        m_GlyphIndex: 20
+        m_GlyphValueRecord:
+          m_XPlacement: 0
+          m_YPlacement: 0
+          m_XAdvance: 0
+          m_YAdvance: 0
+      m_FeatureLookupFlags: 0
   fallbackFontAssets: []
   m_FallbackFontAssetTable: []
   m_CreationSettings:

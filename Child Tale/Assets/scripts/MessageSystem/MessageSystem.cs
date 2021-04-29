@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -50,7 +48,7 @@ public class MessageSystem : MonoBehaviour, ISaveable
 
     private void Update()
     {
-        if (EndGame.isGameEnd || !Photon.Pun.PhotonNetwork.OfflineMode) return;
+        if (!Photon.Pun.PhotonNetwork.OfflineMode || EndGame.isGameEnd) return;
 
         string time = CustomTime.ToStringTime();
 
@@ -77,9 +75,7 @@ public class MessageSystem : MonoBehaviour, ISaveable
     }
 
     public void Save()
-    {
-        PlayerData.instance.messages = indexOfMessage;
-    }
+        => PlayerData.instance.messages = indexOfMessage;
 
     public void Load()
     {
@@ -88,4 +84,5 @@ public class MessageSystem : MonoBehaviour, ISaveable
         {
             Instantiate(messages[i], parentOfMessage.transform);
         }
-    }}
+    }
+}

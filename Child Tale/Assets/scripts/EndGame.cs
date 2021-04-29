@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Localization.Settings;
@@ -22,9 +20,14 @@ public class EndGame : MonoBehaviour
         hungry = clothes = string.Empty;
     }
 
+    private void OnDestroy()
+    {
+        GameManager.instance.OnEndGame -= EndGameAnim;
+        GameManager.instance.OnLoseGame -= LoseGame;
+    }
+
     public void EndGameAnim()
     {
-        print("endgamescript");
         endGameCanvas.enabled = true;
         endGameAnimator.SetBool("End Game", true);
         GameManager.isPaused = isGameEnd = true;
@@ -43,15 +46,15 @@ public class EndGame : MonoBehaviour
         if (!english && player.isHungry)
             hungry = "Вы не поели и упали в обморок во время матча((\n";
         else if (english && player.isHungry)
-            hungry = "You are didn't eat and fall in faint in game((\n";
+            hungry = "You didn't eat and fainted during the game((\n";
 
         if (!english && !clothesCollected)
             clothes = "Вы не собрали всю одежду и не смогли выложиться по полной((\n";
         else if (english && !clothesCollected)
-            clothes = "You are not collected all clothes and could not do your best((\n";
+            clothes = "You didn't collect all clothes and could not do your best((\n";
 
         if (player.isHungry || !clothesCollected)
-            if (english) resultsText.text = hungry + clothes + "Match you all the same losed(((";
+            if (english) resultsText.text = hungry + clothes + "You lost the game after all(((";
             else resultsText.text = hungry + clothes + "Матч вы все-таки проиграли(((";
     }
 

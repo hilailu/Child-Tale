@@ -50,9 +50,7 @@ public class OpenCloseDoor : MonoBehaviour, IInteractable, ISaveable
     }
 
     public void Save()
-    {
-        PlayerData.instance.isItemActivated.Add(ID, isOpen);
-    }
+        => PlayerData.instance.isItemActivated.Add(ID, isOpen);
 
     public void Load()
     {

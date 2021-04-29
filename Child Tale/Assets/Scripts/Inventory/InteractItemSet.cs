@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,9 +18,7 @@ public class InteractItemSet : MonoBehaviour, ISaveable
     }
 
     public void Load()
-    {
-        CollectedItems = new HashSet<string>(PlayerData.instance.CollectedItems);
-    }
+        => CollectedItems = new HashSet<string>(PlayerData.instance.CollectedItems);
 
     public void Save()
     {

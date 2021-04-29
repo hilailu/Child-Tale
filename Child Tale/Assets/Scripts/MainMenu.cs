@@ -19,9 +19,7 @@ public class MainMenu : MonoBehaviour
     private LocalizedString newOrNot = new LocalizedString { TableReference = "UI Text", TableEntryReference = "New"};
 
     void UpdateString(string translatedValue)
-    {
-        newOrContinue.text = translatedValue;
-    }
+        => newOrContinue.text = translatedValue;
 
     private void Awake()
     {
@@ -39,9 +37,7 @@ public class MainMenu : MonoBehaviour
     }
 
     private void OnDestroy()
-    {
-        newOrNot.StringChanged -= UpdateString;
-    }
+        => newOrNot.StringChanged -= UpdateString;
 
     public void CheckSave()
     {
@@ -88,9 +84,7 @@ public class MainMenu : MonoBehaviour
     }
 
     public void Exit()
-    {
-        Application.Quit();
-    }
+        => Application.Quit();
 
     public void ConnectToPhotonServer()
         => launcher.ConnectToPhoton();

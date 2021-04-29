@@ -7,9 +7,7 @@ public class Laptop : MonoBehaviour, IInteractable
     private PhotonView PV;
 
     private void Start()
-    {
-        PV = GetComponent<PhotonView>();
-    }
+        => PV = GetComponent<PhotonView>();
 
     public void Active()
     {
@@ -21,7 +19,5 @@ public class Laptop : MonoBehaviour, IInteractable
 
     [PunRPC]
     void Show()
-    {
-        laptopUI.SetActive(!laptopUI.activeSelf);
-    }
+        => laptopUI.SetActive(!laptopUI.activeSelf);
 }

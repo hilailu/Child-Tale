@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour, ISaveable
 
     void Update()
     {
-        if (photonView.IsMine && !phone.phone && !GameManager.isPaused)
+        if (photonView.IsMine && !GameManager.isPaused && !phone.phone)
         {
             // Поворот камеры вокруг оси X
             _rotationX -= Input.GetAxis("Mouse Y") * sensetiveMouse;
@@ -86,6 +86,7 @@ public class PlayerController : MonoBehaviour, ISaveable
             if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
                 velocity.y += Mathf.Sqrt(jumpForce * -2f * gravity);
         }
+
         velocity.y += gravity * Time.deltaTime;
         _characterController.Move(velocity * Time.deltaTime);
     }

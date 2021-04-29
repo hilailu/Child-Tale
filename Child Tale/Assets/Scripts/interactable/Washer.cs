@@ -11,7 +11,6 @@ public class Washer : MonoBehaviour, IInteractable
 
     private PhotonView photonView;
 
-
     private void Start()
     {
         isOpen = false;
@@ -19,7 +18,6 @@ public class Washer : MonoBehaviour, IInteractable
         audioSource = GetComponent<AudioSource>();
         photonView = GetComponent<PhotonView>();
     }
-
 
     public void Active()
     {

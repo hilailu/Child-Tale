@@ -26,6 +26,7 @@ public class CustomTime : MonoBehaviour, ISaveable
             hours = 9;
             minutes = 0;
         }
+
         StartCoroutine(TimeRoutine());
     }
 

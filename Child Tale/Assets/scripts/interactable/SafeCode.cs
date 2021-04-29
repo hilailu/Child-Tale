@@ -28,9 +28,7 @@ public class SafeCode : MonoBehaviour, IPlayerInteractive, ISaveable
     private string ID { get; set; }
 
     void UpdateString(string translatedValue)
-    {
-        inputField.text = translatedValue;
-    }
+        => inputField.text = translatedValue;
 
     void Awake()
     {
@@ -91,13 +89,13 @@ public class SafeCode : MonoBehaviour, IPlayerInteractive, ISaveable
 
     private void Update()
     {
-        if (isActive && GameManager.isPaused)
+        if (GameManager.isPaused && isActive)
         {
             cameraFromPlayer.transform.position = Vector3.Lerp(cameraFromPlayer.transform.position, pointForCamera.position, Time.deltaTime * 2);
             cameraFromPlayer.transform.rotation = Quaternion.Lerp(cameraFromPlayer.transform.rotation, pointForCamera.rotation, Time.deltaTime * 2);
         }
 
-        if (isActive && Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && isActive)
         {
             StartCoroutine(ForPressEscRoutine());
             GameManager.isPaused = false;
@@ -134,9 +132,7 @@ public class SafeCode : MonoBehaviour, IPlayerInteractive, ISaveable
 
 
     public void Save()
-    {
-        PlayerData.instance.isItemActivated.Add(ID, isOpened);
-    }
+        => PlayerData.instance.isItemActivated.Add(ID, isOpened);
 
     public void Load()
     {

@@ -23,7 +23,7 @@ public class Phone : MonoBehaviourPunCallbacks, IPunObservable
     {
         time.text = $"{CustomTime.hours:00}:{CustomTime.minutes:00}";
 
-        if (!GameManager.isPaused && !TextFile.isFileOpen && PV.IsMine)
+        if (!GameManager.isPaused && PV.IsMine && !TextFile.isFileOpen)
         {
             if (Input.GetKeyDown(KeyCode.P))
             {
@@ -41,7 +41,8 @@ public class Phone : MonoBehaviourPunCallbacks, IPunObservable
 
                 }
             }
-            if (phone && Input.GetKeyDown(KeyCode.U))
+
+            if (Input.GetKeyDown(KeyCode.U) && phone)
             {
                 phoneUI.SetActive(!phoneUI.activeSelf);
             }

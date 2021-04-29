@@ -18,6 +18,7 @@ public class TV : MonoBehaviour, IInteractable
         PV = GetComponent<PhotonView>();
         img.enabled = false;
     }
+
     public void Active()
     {
         if (PhotonNetwork.OfflineMode)

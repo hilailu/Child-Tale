@@ -22,24 +22,16 @@ public class Launcher : MonoBehaviourPunCallbacks
   
 
     private void Start()
-    {
-        buttonLoadArena.SetActive(false);
-    }
+        => buttonLoadArena.SetActive(false);
 
     private void Awake()
-    {
-        PhotonNetwork.AutomaticallySyncScene = true;
-    }
+        => PhotonNetwork.AutomaticallySyncScene = true;
 
     public void SetPlayerName(string name)
-    {
-        playerName = name;
-    }
+        => playerName = name;
 
     public void SetRoomName(string name)
-    {
-        roomName = name;
-    }
+        => roomName = name;
 
     public void Disconect()
     {
@@ -87,9 +79,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void LoadArena()
     {
         if (PhotonNetwork.CurrentRoom.PlayerCount > 1)
-        {
             PhotonNetwork.LoadLevel(1);
-        }
         else
             connectionStatus.text = "Need minimum 2 players connected";
     }
@@ -113,16 +103,12 @@ public class Launcher : MonoBehaviourPunCallbacks
     }
 
     public override void OnDisconnected(DisconnectCause cause)
-    {
-        Debug.Log("disconnected");
-        PhotonNetwork.OfflineMode = true;
-    }
+        => PhotonNetwork.OfflineMode = true;
+
 
     public override void OnJoinedRoom()
     {
         if (PhotonNetwork.IsMasterClient)
-        {
             ActiveLoadButton(true);
-        }
     }
 }

@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,6 +28,7 @@ public class InventoryManager : MonoBehaviour, ISaveable
     {
         SaveSystem.onSave -= Save;
         SaveSystem.onLoad -= Load;
+        instance.OnInventoryChanged -= UpdateUI;
     }
 
     private void UpdateUI()
@@ -36,13 +36,9 @@ public class InventoryManager : MonoBehaviour, ISaveable
         for (int i = 0; i < inventoryItems.Length; i++)
         {
             if (i < items.Count)
-            {
                 inventoryItems[i].Add(items[i]);
-            }
             else
-            {
                 inventoryItems[i]?.Remove();
-            }
         }
     }
 
@@ -74,9 +70,7 @@ public class InventoryManager : MonoBehaviour, ISaveable
     }
 
     public void Save()
-    {
-        PlayerData.instance.items = new List<Item>(this.items);
-    }
+        => PlayerData.instance.items = new List<Item>(this.items);
 
     public void Load()
     {

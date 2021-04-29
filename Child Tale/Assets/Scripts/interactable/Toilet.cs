@@ -11,6 +11,7 @@ public class Toilet : MonoBehaviour, IInteractable
         audioSource = GetComponent<AudioSource>();
         PV = GetComponent<PhotonView>();
     }
+
     public void Active()
     {
         if (PhotonNetwork.OfflineMode)

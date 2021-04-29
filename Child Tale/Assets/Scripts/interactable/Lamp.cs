@@ -29,22 +29,16 @@ public class Lamp : MonoBehaviour, IInteractable, ISaveable
             SetLight();
         else
             PV.RPC("SetLight", RpcTarget.All);
-
     }
 
     [PunRPC]
     void SetLight()
-    {
-        svet.enabled = !svet.isActiveAndEnabled;
-    }
+        => svet.enabled = !svet.isActiveAndEnabled;
 
     public void Save()
-    {
-        PlayerData.instance.isItemActivated.Add(ID, svet.isActiveAndEnabled);
-    }
+        => PlayerData.instance.isItemActivated.Add(ID, svet.isActiveAndEnabled);
 
     public void Load()
-    {
-        svet.enabled = PlayerData.instance.isItemActivated[ID];
-    }
+        => svet.enabled = PlayerData.instance.isItemActivated[ID];
+
 }

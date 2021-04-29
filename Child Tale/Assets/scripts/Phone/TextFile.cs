@@ -12,9 +12,7 @@ public class TextFile : MonoBehaviour, IPointerClickHandler
     public static bool isFileOpen;
 
     public void Awake()
-    {
-        input = file.GetComponent<TMP_InputField>();
-    }
+        => input = file.GetComponent<TMP_InputField>();
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -30,9 +28,7 @@ public class TextFile : MonoBehaviour, IPointerClickHandler
     }
 
     public void SaveFile()
-    {
-        filetext = input.text;
-    }
+        => filetext = input.text;
 
     public void Close()
     {

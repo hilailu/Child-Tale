@@ -4,16 +4,12 @@ using System.IO;
 
 public class InteractItem : MonoBehaviour, IInteractable
 {
-    private string ID { get; set; }
     [SerializeField] private Item item;
     private PhotonView PV;
 
-    private void Awake()
-    {
-        ID = transform.position.sqrMagnitude + "-" + name + "-" + transform.GetSiblingIndex();   
-    }
+    private string ID { get; set; }
 
-    private void Start()
+    private void Awake()
     {
         if (File.Exists(Application.persistentDataPath + "/PlayerData.json"))
         {
@@ -24,12 +20,11 @@ public class InteractItem : MonoBehaviour, IInteractable
             }
         }
         PV = GetComponent<PhotonView>();
+        ID = transform.position.sqrMagnitude + "-" + name + "-" + transform.GetSiblingIndex();   
     }
 
     private void Update()
-    {
-        transform.Rotate(0, 1.5f, 0);
-    }
+        => transform.Rotate(0, 1.5f, 0);
 
     public void Active()
     {
@@ -45,7 +40,5 @@ public class InteractItem : MonoBehaviour, IInteractable
 
     [PunRPC]
     void DeleteTaked()
-    {
-        Destroy(gameObject);
-    }
+        => Destroy(gameObject);
 }

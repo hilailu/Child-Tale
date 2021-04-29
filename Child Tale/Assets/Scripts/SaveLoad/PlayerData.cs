@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 public class PlayerData : MonoBehaviour, ISerializationCallbackReceiver
 {
     #region Singleton

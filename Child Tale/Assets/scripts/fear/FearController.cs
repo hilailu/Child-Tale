@@ -27,6 +27,7 @@ public class FearController : MonoBehaviour, ISaveable
     {
         SaveSystem.onSave -= Save;
         SaveSystem.onLoad -= Load;
+        GameManager.instance.OnEndGame -= HideBare;
     }
 
     private void Start()
@@ -78,9 +79,7 @@ public class FearController : MonoBehaviour, ISaveable
         => slider.gameObject.SetActive(false);
 
     public void Save()
-    {
-        PlayerData.instance.fear = this.fear;
-    }
+        => PlayerData.instance.fear = this.fear;
 
     public void Load()
     {

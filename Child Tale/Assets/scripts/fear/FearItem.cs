@@ -12,7 +12,5 @@ public class FearItem : MonoBehaviour, IPlayerInteractive
     }
 
     private void Update()
-    {
-        transform.Rotate(0, 1.5f, 0);
-    }
+        => transform.Rotate(0, 1.5f, 0);
 }

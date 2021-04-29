@@ -60,7 +60,6 @@ public class GameManager : MonoBehaviourPunCallbacks
 
             if (PhotonNetwork.IsMasterClient)
             {
-                Debug.Log("instatntiating player 1");
                 player1 = PhotonNetwork.Instantiate("player",
                     player1SpawnPosition.transform.position,
                     player1SpawnPosition.transform.rotation, 0);
@@ -68,7 +67,6 @@ public class GameManager : MonoBehaviourPunCallbacks
             }
             else
             {
-                Debug.Log("instatntiating player 2");
                 player2 = PhotonNetwork.Instantiate("player",
                     player2SpawnPosition.transform.position,
                     player2SpawnPosition.transform.rotation, 0);
@@ -80,7 +78,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     private void Update()
     {
         // Пауза
-        if (!SafeCode.isActive && Input.GetKeyDown(KeyCode.Escape) && !EndGame.isGameEnd)
+        if (Input.GetKeyDown(KeyCode.Escape) && !SafeCode.isActive && !EndGame.isGameEnd)
         {
             pause.SetActive(!pause.activeSelf);
             if (!pause.activeSelf)
@@ -119,9 +117,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
 
     public void SetInteractableAnim(bool bol)
-    {
-        _interactAnimator.SetBool("InteractOpen", bol);
-    }
+        => _interactAnimator.SetBool("InteractOpen", bol);
 
 
     public void ToMenu()
@@ -139,8 +135,6 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        Debug.Log("onplayerleftroom");
-
         if (otherPlayer.IsMasterClient)
             SceneManager.LoadScene(0);
     }
