@@ -31,6 +31,18 @@ MonoBehaviour:
     m_Key: Lose
     m_Metadata:
       m_Items: []
+  - m_Id: 6050583319216128
+    m_Key: hungry
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6050586058096640
+    m_Key: clothes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6050588004253696
+    m_Key: match
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

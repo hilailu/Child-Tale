@@ -11,9 +11,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     public GameObject player2SpawnPosition;
     public GameObject singlePlayer;
 
-    private GameObject player1;
-    private GameObject player2;
-
     [SerializeField] private GameObject pause;
     [SerializeField] private VideoPlayer video;
     [SerializeField] private AudioListener listener;
@@ -60,14 +57,14 @@ public class GameManager : MonoBehaviourPunCallbacks
 
             if (PhotonNetwork.IsMasterClient)
             {
-                player1 = PhotonNetwork.Instantiate("player",
+                PhotonNetwork.Instantiate("player",
                     player1SpawnPosition.transform.position,
                     player1SpawnPosition.transform.rotation, 0);
 
             }
             else
             {
-                player2 = PhotonNetwork.Instantiate("player",
+                PhotonNetwork.Instantiate("player",
                     player2SpawnPosition.transform.position,
                     player2SpawnPosition.transform.rotation, 0);
             }
@@ -106,6 +103,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
     }
 
+    // ”правление видимостью курсора
     public void CursorView(bool view)
     {
         Cursor.visible = view;
@@ -131,12 +129,6 @@ public class GameManager : MonoBehaviourPunCallbacks
             else
                 PhotonNetwork.LeaveRoom();
         }
-    }
-
-    public override void OnPlayerLeftRoom(Player otherPlayer)
-    {
-        if (otherPlayer.IsMasterClient)
-            SceneManager.LoadScene(0);
     }
 
 

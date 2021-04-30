@@ -67,6 +67,7 @@ public class Phone : MonoBehaviourPunCallbacks, IPunObservable
         => GetComponent<MeshRenderer>().enabled = phone;
 
 
+    // Синхронизация использования(достать из кармана) телефона
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)

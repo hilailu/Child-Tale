@@ -126,5 +126,25 @@ MonoBehaviour:
     m_Localized: HARD
     m_Metadata:
       m_Items: []
+  - m_Id: 10095506955763712
+    m_Localized: Connecting...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10095608474697728
+    m_Localized: Need minimum 2 players
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10095610701873152
+    m_Localized: 'You was joined to room '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10096159467831296
+    m_Localized: Connected to server
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10099330156134400
+    m_Localized: 'You created room '
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

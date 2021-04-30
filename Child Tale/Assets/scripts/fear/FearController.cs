@@ -32,18 +32,17 @@ public class FearController : MonoBehaviour, ISaveable
 
     private void Start()
     {
-        if (Photon.Pun.PhotonNetwork.OfflineMode)
-        {
-            plusFearCD = PlayerPrefs.GetFloat("mode");
-            StartCoroutine(PlusFearRoutine());
-            slider.value = fear;
-            slider.transform.gameObject.SetActive(true);
-        }
-        else
+        // Система страха в мультиплеере не активна
+        if (!Photon.Pun.PhotonNetwork.OfflineMode)
         {
             slider.transform.gameObject.SetActive(false);
             return;
         }
+
+        plusFearCD = PlayerPrefs.GetFloat("mode");
+        StartCoroutine(PlusFearRoutine());
+        slider.value = fear;
+        slider.transform.gameObject.SetActive(true);
 
         GameManager.instance.OnEndGame += HideBare;
     }

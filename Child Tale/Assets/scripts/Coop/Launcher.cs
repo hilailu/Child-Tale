@@ -2,6 +2,8 @@ using UnityEngine;
 using Photon.Realtime;
 using UnityEngine.UI;
 using Photon.Pun;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Tables;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
@@ -19,19 +21,26 @@ public class Launcher : MonoBehaviourPunCallbacks
     string playerName = string.Empty;
     string roomName = string.Empty;
 
-  
+    private LocalizedString PhotonStatus = new LocalizedString { TableReference = "UI Text" };
+
+
+    private void Awake()
+    {
+        PhotonNetwork.AutomaticallySyncScene = true;
+        PhotonStatus.StringChanged += UpdateString;
+    }
 
     private void Start()
         => buttonLoadArena.SetActive(false);
-
-    private void Awake()
-        => PhotonNetwork.AutomaticallySyncScene = true;
 
     public void SetPlayerName(string name)
         => playerName = name;
 
     public void SetRoomName(string name)
         => roomName = name;
+
+    void UpdateString(string translatedValue)
+        => connectionStatus.text = translatedValue;
 
     public void Disconect()
     {
@@ -43,7 +52,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void ConnectToPhoton()
     {
-        connectionStatus.text = "connecting...";
+        PhotonStatus.TableEntryReference = "connecting";
         connectionStatus.color = Color.white;
         PhotonNetwork.GameVersion = gameVersion;
 
@@ -61,6 +70,9 @@ public class Launcher : MonoBehaviourPunCallbacks
             roomOptions.MaxPlayers = maxPlayersPerRoom;
             TypedLobby typedLobby = new TypedLobby(roomName, LobbyType.Default);
             PhotonNetwork.CreateRoom(roomName, roomOptions, typedLobby);
+
+            PhotonStatus.TableEntryReference = "createdRoom";
+            connectionStatus.text += $" \"{roomName}\"";
         }
     }
 
@@ -70,10 +82,10 @@ public class Launcher : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.LocalPlayer.NickName = playerName;
             PhotonNetwork.JoinRoom(roomName);
-            connectionStatus.text = $"You was join to room \"{roomName}\"";
+
+            PhotonStatus.TableEntryReference = "joinedRoom";
+            connectionStatus.text += $" \"{roomName}\"";
         }
-        else
-            connectionStatus.text = "You are not connected";
     }
 
     public void LoadArena()
@@ -81,9 +93,10 @@ public class Launcher : MonoBehaviourPunCallbacks
         if (PhotonNetwork.CurrentRoom.PlayerCount > 1)
             PhotonNetwork.LoadLevel(1);
         else
-            connectionStatus.text = "Need minimum 2 players connected";
+            PhotonStatus.TableEntryReference = "need2Players";
     }
 
+    // ”правление видимостью кнопок
     private void ActiveLoadButton(bool avtive)
     {
         buttonLoadArena.SetActive(avtive);
@@ -92,11 +105,10 @@ public class Launcher : MonoBehaviourPunCallbacks
     }
 
     // Photon Methods
-
     public override void OnConnected()
     {
         base.OnConnected();
-        connectionStatus.text = "connected to server";
+        PhotonStatus.TableEntryReference = "connected";
         connectionStatus.color = Color.yellow;
         buttonLoadArena.SetActive(false);
         PhotonNetwork.OfflineMode = false;

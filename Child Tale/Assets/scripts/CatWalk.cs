@@ -99,6 +99,7 @@ public class CatWalk : MonoBehaviour, IInteractable
     }
 
 
+    // „тоб м€укал иногда
     IEnumerator MeowSomeTimesRoutine()
     {
         yield return new WaitForSeconds(Random.Range(8f, 12f));

@@ -44,5 +44,17 @@ MonoBehaviour:
     m_Localized: You lose!
     m_Metadata:
       m_Items: []
+  - m_Id: 6050583319216128
+    m_Localized: You didn't eat and fainted during the game((
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6050586058096640
+    m_Localized: You didn't collect all clothes and could not do your best((
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6050588004253696
+    m_Localized: You lost the game after all(((
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

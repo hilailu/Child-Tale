@@ -45,6 +45,7 @@ public class Microwave : MonoBehaviour, IInteractable, ISaveable
     void playAnim()
         => StartCoroutine(WorkingMicrowaveRoutine(60f));
 
+    // Имитация работы микроволновки
     IEnumerator WorkingMicrowaveRoutine(float time)
     {
         isWorking = true;

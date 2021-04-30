@@ -18,6 +18,7 @@ public class SpawnFearItemsManager : MonoBehaviour
             SpawnItem();
     }
 
+    // Спаун айтемов в рандомнов месте(почти), но не в таком же месте как спаун прошлого айтема
     private void SpawnItem()
     {
         Transform randomPosition = spawnPositions[Random.Range(0, spawnPositions.Length)];

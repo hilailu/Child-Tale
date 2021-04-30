@@ -1,6 +1,5 @@
 using UnityEngine.EventSystems;
 using UnityEngine;
-using TMPro;
 
 public class Message : MonoBehaviour, IPointerClickHandler
 {

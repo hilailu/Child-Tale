@@ -115,6 +115,26 @@ MonoBehaviour:
     m_Key: hard
     m_Metadata:
       m_Items: []
+  - m_Id: 10095506955763712
+    m_Key: connecting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10095608474697728
+    m_Key: need2Players
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10095610701873152
+    m_Key: joinedRoom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10096159467831296
+    m_Key: connected
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10099330156134400
+    m_Key: createdRoom
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
